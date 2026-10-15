@@ -1,0 +1,1907 @@
+/* ============================================================================
+   Ember · site v5
+   The app's style (grafiet, Instrument Sans, white 6% cards, the white pill and
+   the round button). A glass navigation; a dust hero after stellar.org; the
+   bike from the Figma designs; a drawing of Ember with folding tiles; the four
+   steps with their screens; Ember lying in the footer.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700; font-stretch: 75% 100%; font-display: swap;
+  src: url(assets/fonts/instrumentsans-400-700-latin-ext.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700; font-stretch: 75% 100%; font-display: swap;
+  src: url(assets/fonts/instrumentsans-400-700-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: dark;
+  --studio: #07090a;   /* the black of the team's bike photo */
+  --bg-1: #1c1d20; --bg-2: #2a2c30; --bg-3: #3b3d42; --ink-0: #111214;
+  --text: #f5f5f7; --text-2: #c2c5cb; --text-3: #a5a8b0; --on-light: #23252b; --arrow: #17171c;
+  --vlak: rgba(255, 255, 255, .06); --vlak-actief: rgba(255, 255, 255, .08); --toets: rgba(255, 255, 255, .2);
+  --lijn: rgba(255, 255, 255, .1);
+  --ok: #82b98e; --ok-t: #96c5a0; --warn: #e8a23a; --danger: #e24d42;
+  --paper: #ece8e3; --ink: #23252b; --ink-2: #5d5a55;
+  --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --bar: 76px;
+  --r: 24px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--bar); background: var(--studio); }
+body { margin: 0; overflow-x: clip; background: var(--bg-1); color: var(--text); font: 400 16px/24px var(--font); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img, svg, canvas { display: block; }
+[hidden] { display: none !important; }
+p, h1, h2, h3, ol, ul, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 8px; }
+.skip { position: absolute; left: 12px; top: -80px; z-index: 100; padding: 12px 16px; border-radius: 12px; background: var(--text); color: var(--on-light); font-weight: 500; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* type */
+h1, h2, h3 { font-weight: 400; text-wrap: balance; }
+.d1 { font-size: clamp(52px, 8.4vw, 144px); line-height: .96; letter-spacing: -.045em; }
+.d2 { font-size: clamp(40px, 5.6vw, 96px); line-height: 1; letter-spacing: -.04em; }
+.say { font-size: clamp(40px, 5.6vw, 96px); line-height: 1; letter-spacing: -.04em; font-weight: 400; text-wrap: balance; }
+.lab { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; line-height: 16px; font-weight: 500; color: var(--text-3); }
+.lab::before { content: ""; width: 6px; height: 6px; border-radius: 3px; background: currentColor; }
+.lab--ok::before { background: var(--ok); }
+.small { font-size: 16px; line-height: 24px; color: var(--text-3); max-width: 38ch; text-wrap: pretty; }
+.body { font-size: 18px; line-height: 28px; color: var(--text-2); max-width: 40ch; text-wrap: pretty; }
+
+/* the app's buttons */
+.pill { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 26px; border-radius: 24px; background: var(--text); color: var(--on-light); font: 500 16px/1 var(--font); text-decoration: none; box-shadow: 0 6px 24px -10px rgba(0, 0, 0, .6); transition: transform .2s var(--ease), background-color .3s, color .3s; }
+.pill:hover { transform: translateY(-1px); }
+.pill:active { transform: scale(.97); }
+.rond__c { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 32px; background: var(--text); color: var(--arrow); transition: transform .3s var(--ease); }
+
+/* ------------------------------------------------------------------ bar: logo and buttons on contrast, the links in glass */
+.bar { position: fixed; inset: 0 0 auto 0; z-index: 60; height: var(--bar); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: var(--gutter); pointer-events: none; }
+.bar > * { pointer-events: auto; }
+.bar__brand { justify-self: start; display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-size: 20px; line-height: 28px; letter-spacing: -.01em; color: var(--text); transition: color .3s; }
+.bar__brand img { width: 28px; height: auto; transition: filter .3s; }
+.bar__sep { width: 1px; height: 18px; background: rgba(245, 245, 247, .35); transition: background-color .3s; }
+.bar.is-light .bar__sep { background: rgba(35, 37, 43, .35); }
+.bar__nav { position: relative; display: flex; gap: 2px; padding: 5px; border-radius: 999px; background: rgba(28, 29, 32, .45); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+.bar__lens { display: none; }
+.bar__nav a { padding: 9px 18px; border-radius: 999px; text-decoration: none; font-size: 15px; font-weight: 500; color: var(--text); opacity: .72; transition: opacity .25s, background-color .25s; }
+.bar__nav a:hover { opacity: 1; }
+.bar__nav a[aria-current="true"] { opacity: 1; background: rgba(255, 255, 255, .1); }
+.bar__end { justify-self: end; display: flex; align-items: center; gap: 20px; }
+.bar__count { font-size: 15px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--text-3); transition: color .3s; }
+.bar__count b { color: var(--text); font-weight: 500; transition: color .3s; }
+/* over a light section */
+.bar.is-light .bar__brand, .bar.is-light .bar__count b { color: var(--ink); }
+.bar.is-light .bar__count { color: var(--ink-2); }
+.bar.is-light .bar__brand img { filter: invert(1) brightness(.2); }
+.bar.is-light .bar__nav { background: rgba(236, 232, 227, .55); }
+.bar.is-light .bar__nav a { color: var(--ink); }
+.bar.is-light .bar__nav a[aria-current="true"] { background: rgba(35, 37, 43, .08); }
+.bar.is-light .pill { background: var(--ink); color: var(--text); }
+@media (max-width: 860px) { .bar { grid-template-columns: 1fr auto; } .bar__nav { display: none; } .bar__count { display: none; } .pill { height: 44px; padding: 0 20px; font-size: 15px; } }
+
+/* ------------------------------------------------------------------ 1 · the opening */
+.seq { position: relative; height: 560vh; height: 560svh; background: var(--studio); }
+
+/* ------------------------------------------------------------------ 1 · the hero: Ember close and large, shaded into the dark at the bottom (as the
+   team's); the scroll pulls back until the whole product stands; the ring of dots is born out of its lights */
+.hero { position: relative; height: 190vh; height: 190svh; background: var(--studio); }
+.hero__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.hero__word { position: absolute; left: 50%; top: 40%; z-index: 0; margin: 0; transform: translate(-50%, -50%) scale(var(--ws, 1)); font-size: clamp(140px, 30vw, 540px); line-height: .9; letter-spacing: -.06em; white-space: nowrap; pointer-events: none;
+  background: linear-gradient(180deg, rgba(245, 245, 247, .19), rgba(245, 245, 247, .095) 55%, rgba(245, 245, 247, .03)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__ring, .hero__lights { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero__ring { z-index: 4; } .hero__lights { z-index: 5; }
+.hero__ember { z-index: 3; }
+.hero__copy { position: absolute; z-index: 8; left: var(--gutter); bottom: clamp(32px, 7vh, 72px); display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.hero__copy h1 { max-width: none; font-size: clamp(40px, 5vw, 80px); }
+.hero__side { position: absolute; z-index: 8; right: var(--gutter); bottom: clamp(32px, 7vh, 72px); display: flex; flex-direction: column; align-items: flex-end; gap: 24px; text-align: right; }
+.hero__lead { max-width: 30ch; font-size: 16px; line-height: 24px; color: var(--text-3); text-wrap: pretty; }
+.hero__down { text-decoration: none; }
+.hero__down:hover .rond__c { transform: scale(1.04); }
+@media (max-width: 760px), (max-aspect-ratio: 4/5) {
+  .hero { height: 150svh; }
+  .hero__copy { right: 96px; bottom: 28px; gap: 18px; }
+  .hero__copy h1 { font-size: clamp(36px, 11.2vw, 56px); }
+  .hero__side { bottom: 28px; }
+  .hero__lead { display: none; }
+}
+.seq__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--studio); }
+.layer { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform, opacity; }
+.bike { width: 825px; height: 1905px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 17%, #000 80%, transparent 100%), linear-gradient(180deg, transparent 0, #000 7%, #000 90%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 17%, #000 80%, transparent 100%), linear-gradient(180deg, transparent 0, #000 7%, #000 90%, transparent 100%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+.shadow { width: 223px; height: 406px; z-index: 3; opacity: 0; pointer-events: none; }
+.bike--blur { width: 412px; height: 952px; z-index: 0; }
+.bike:not(.bike--blur) { z-index: 1; }
+.plate { width: 450px; height: 900px; z-index: 3; opacity: 0; }
+.ember { width: 450px; height: 900px; z-index: 4; background: url(assets/img/ember-flip.webp?v=53) 0 0 / 3600px 1800px no-repeat; }   /* the sheet is 7200 x 3600: crisp when scaled up */
+.lights { position: absolute; inset: 0; pointer-events: none; }
+.light { position: absolute; width: 4.25%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); opacity: var(--on, 0);
+  background: radial-gradient(circle, #fffdf8 0 36%, rgba(255, 249, 238, .55) 52%, rgba(255, 249, 238, 0) 74%); }
+.light::after { content: ""; position: absolute; inset: -180%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 246, 228, .3), rgba(255, 246, 228, 0) 60%); }
+.light:nth-child(1) { left: 50.000%; top: 22.500%; } .light:nth-child(2) { left: 63.250%; top: 23.683%; }
+.light:nth-child(3) { left: 72.950%; top: 26.917%; } .light:nth-child(4) { left: 76.500%; top: 31.333%; }
+.light:nth-child(5) { left: 72.950%; top: 35.750%; } .light:nth-child(6) { left: 63.250%; top: 38.983%; }
+.light:nth-child(7) { left: 50.000%; top: 40.167%; } .light:nth-child(8) { left: 36.750%; top: 38.983%; }
+.light:nth-child(9) { left: 27.050%; top: 35.750%; } .light:nth-child(10) { left: 23.500%; top: 31.333%; }
+.light:nth-child(11) { left: 27.050%; top: 26.917%; } .light:nth-child(12) { left: 36.750%; top: 23.683%; }
+.seq__wave { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
+.seq__dust, .seq__dots { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; pointer-events: none; }
+.seq__shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; background: linear-gradient(90deg, rgba(7, 8, 9, .92) 0%, rgba(7, 8, 9, .6) 30%, rgba(7, 8, 9, 0) 46%); }
+
+.beat { position: absolute; z-index: 7; left: var(--gutter); bottom: clamp(32px, 7vh, 72px); width: min(560px, 36vw); opacity: 0; visibility: hidden; will-change: opacity, transform; }
+.beat .lab { margin-bottom: 20px; }
+.beat .small { margin-top: 20px; }
+h1 .ln, h2 .ln, h3 .ln { display: block; white-space: nowrap; }
+
+.tags { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.tags svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tags path { fill: none; stroke: rgba(245, 245, 247, .45); stroke-width: 1; }
+.tags circle { fill: var(--text); }
+.tag { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 14px; line-height: 18px; font-weight: 500; color: var(--text); opacity: 0; }
+.tag span { display: block; font-weight: 400; font-size: 13px; color: var(--text-3); }
+
+/* the app's day chart (Figma v11 · H1 · Kaart · Vandaag) */
+.vandaag { position: absolute; z-index: 9; left: 0; top: 0; width: 342px; transform-origin: 0 0; opacity: 0; pointer-events: none;
+  padding: 20px; border-radius: 24px; background: rgba(28, 29, 32, .92); box-shadow: inset 0 0 0 1px var(--vlak-actief), 0 30px 80px -20px rgba(0, 0, 0, .8);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.vandaag__kop { display: flex; flex-direction: column; gap: 4px; }
+.periode { display: flex; justify-content: space-between; align-items: flex-start; }
+.periode__tabs { display: flex; align-items: center; }
+.vandaag.is-live { pointer-events: auto; }
+.ptab { padding: 6px 8px; border: 0; border-radius: 999px; background: none; font: 500 12px/16px var(--font); color: var(--text-3); cursor: pointer; transition: color .2s, background-color .2s; }
+.ptab:first-child { padding-left: 0; }
+.ptab:hover { color: var(--text-2); }
+.ptab--on { color: var(--text); }
+.periode__knoppen { display: flex; align-items: center; gap: 8px; }
+.pknop { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 18px; background: none; cursor: pointer; transition: background-color .2s, transform .15s; }
+.pknop:hover { background: var(--vlak-actief); }
+.pknop:active { transform: scale(.92); }
+.periode__tekst { display: flex; flex-direction: column; gap: 4px; }
+.periode__tekst .t20 { font-size: 20px; line-height: 28px; letter-spacing: -.1px; }
+.periode__tekst .t12 { font-size: 12px; line-height: 16px; color: var(--text-3); }
+.grafiek { display: flex; flex-direction: column; gap: 8px; }
+.grafiek__vlak { position: relative; height: 140px; }
+.grafiek__raster { position: absolute; left: 0; top: 44px; width: 266px; height: 1px; background: var(--vlak-actief); }
+.grafiek__bars { position: absolute; left: 0; top: 0; display: flex; align-items: flex-end; justify-content: space-between; width: 266px; height: 140px; padding: 0 8px; }
+.grafiek__bars i { width: var(--w, 6px); height: var(--h, 0); border-radius: 3px; background: var(--c, rgba(130, 185, 142, .38)); transform-origin: 50% 100%; transform: scaleY(var(--g, 0)); }
+.grafiek__as { position: absolute; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--text-3); }
+.grafiek__as--20 { left: 283px; top: 36px; } .grafiek__as--15 { left: 286px; top: 124px; }
+.grafiek__uren { display: flex; justify-content: space-between; padding-right: 36px; min-height: 16px; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--text-3); }
+.grafiek__uren .nu { color: var(--text); }
+
+@media (max-width: 760px), (max-aspect-ratio: 4/5) {
+  .seq__shade { background: linear-gradient(0deg, rgba(4, 5, 5, .94) 0%, rgba(4, 5, 5, .7) 30%, rgba(4, 5, 5, 0) 52%); }
+  .beat { width: auto; right: var(--gutter); bottom: 28px; }
+  .hero__lead { margin-top: 12px; font-size: 16px; line-height: 24px; }
+}
+
+/* ------------------------------------------------------------------ in practice: white */
+.prak { background: #fff; color: var(--ink); padding: clamp(80px, 10vw, 160px) 0 clamp(80px, 10vw, 140px); }
+.prak .lab { color: var(--ink-2); }
+.prak__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 0 var(--gutter) clamp(32px, 4vw, 56px); }
+.prak__head .d2 { max-width: 12ch; }
+.prak__nav { display: flex; gap: 8px; }
+.prak__btn { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 28px; border: 0; background: #f1f1f2; color: var(--ink); cursor: pointer; transition: background-color .2s, opacity .2s, transform .15s; }
+.prak__btn:hover { background: #e6e6e8; }
+.prak__btn:active { transform: scale(.95); }
+.prak__btn[disabled] { opacity: .35; cursor: default; }
+.prak__track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--gutter); padding: 0 var(--gutter); scrollbar-width: none; overscroll-behavior-x: contain; }
+.prak__track::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 clamp(300px, 46vw, 760px); scroll-snap-align: start; }
+.slide--phone { flex-basis: clamp(240px, 24vw, 380px); }
+.slide figure { display: flex; flex-direction: column; gap: 16px; }
+.slide img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); background: #f1f1f2; }
+.slide__phone { aspect-ratio: auto; height: 0; padding-bottom: calc(100% * 2 / 3 * (46 / 24)); position: relative; border-radius: var(--r); background: #f1f1f2; overflow: hidden; }
+.slide__phone img { position: absolute; left: 50%; top: 8%; width: 62%; height: auto; aspect-ratio: auto; transform: translateX(-50%); border-radius: 28px; box-shadow: 0 30px 60px -24px rgba(35, 37, 43, .45); }
+.slide figcaption { font-size: 16px; line-height: 24px; color: var(--ink-2); max-width: 40ch; }
+.slide figcaption b { display: block; font-weight: 500; color: var(--ink); }
+.prak__foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--gutter) 0; }
+.prak__progress { display: flex; gap: 6px; }
+.prak__progress i { width: 12px; height: 4px; border-radius: 2px; background: rgba(35, 37, 43, .18); transition: width .4s var(--ease), background-color .4s; }
+.prak__progress i.on { width: 40px; background: var(--ink); }
+.prak__note { font-size: 13px; color: var(--ink-2); }
+@media (max-width: 760px) { .slide { flex-basis: 84vw; } .slide--phone { flex-basis: 64vw; } .slide__phone { padding-bottom: 120%; } .prak__nav { display: none; } }
+
+/* ------------------------------------------------------------------ footer: minimal */
+.foot { background: var(--ink-0); border-top: 1px solid var(--lijn); padding: 40px var(--gutter) 32px; }
+.foot__row { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.foot__mark { width: 104px; height: auto; opacity: .9; }
+.foot__nav { display: flex; gap: 4px 28px; flex-wrap: wrap; }
+.foot__nav a, .foot__mail { font-size: 15px; line-height: 24px; color: var(--text-3); text-decoration: none; transition: color .2s; }
+.foot__nav a:hover, .foot__mail:hover { color: var(--text); }
+.foot__legal { margin-top: 28px; font-size: 13px; line-height: 18px; color: var(--text-3); opacity: .8; }
+
+/* reveal */
+.js [data-in] { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+.js [data-in].is-in { opacity: 1; transform: none; }
+
+
+/* ------------------------------------------------------------------ the model: the expected band over the bars */
+.model { position: absolute; left: 0; top: 0; width: 266px; height: 140px; overflow: visible; pointer-events: none; }
+.model__band { fill: rgba(245, 245, 247, .09); }
+.model__edge { fill: none; stroke: rgba(245, 245, 247, .6); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.model__label { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 6px; font-size: 11px; line-height: 14px; font-weight: 500; color: var(--text-2); white-space: nowrap; opacity: 0; pointer-events: none; }
+.model__label i { width: 14px; border-top: 1px dashed rgba(245, 245, 247, .7); }
+
+/* ------------------------------------------------------------------ the notice: the app's home screen in a phone (390 x 844, scaled) */
+.phone { position: absolute; z-index: 9; left: 0; top: 0; width: 402px; transform-origin: 0 0; opacity: 0; pointer-events: none; }
+/* the phone: the app's home (Figma v11 · H5), 390 x 844 design px, clipped at the bottom, in a thin metal rim
+   (the team's frame has a 2.5 mm rim; this one 1.2 mm) */
+.iphone { --rim: 6px; position: relative; width: calc(390px + 2 * var(--rim)); height: calc(844px + 2 * var(--rim)); padding: var(--rim); border-radius: 56px;
+  background: linear-gradient(160deg, #c9ced2, #7e848a 40%, #9ea3a9 60%, #5f656b); box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .85), inset 0 0 0 1px rgba(255, 255, 255, .25); }
+.iphone::before { content: ""; position: absolute; inset: 2px; border-radius: 54px; background: #050506; }
+.iphone__btn { position: absolute; width: 3px; border-radius: 1.5px; background: linear-gradient(90deg, #7e848a, #d7dadd 60%, #9ea3a9); }
+.iphone__btn--action { left: -2px; top: 150px; height: 36px; } .iphone__btn--up { left: -2px; top: 214px; height: 58px; } .iphone__btn--down { left: -2px; top: 288px; height: 58px; } .iphone__btn--side { right: -2px; top: 230px; height: 90px; }
+.ios { position: relative; width: 390px; height: 844px; border-radius: 50px; overflow: hidden; color: var(--text); text-align: left;
+  background: linear-gradient(180deg, #1c1d20 0%, #2a2c30 50%, #3b3d42 100%); }
+.ios__status { position: absolute; z-index: 2; left: 0; right: 0; top: 0; background: linear-gradient(180deg, #1c1d20 72%, rgba(28, 29, 32, 0)); display: flex; justify-content: space-between; align-items: center; height: 48px; padding: 14px 24px 8px; font: 600 16px/1 -apple-system, "SF Pro Text", system-ui, sans-serif; color: #fff; }
+.ios__island { position: absolute; left: 50%; top: 11px; width: 126px; height: 37px; translate: -50% 0; border-radius: 19px; background: #000; }
+.ios__icons { display: flex; gap: 6px; align-items: center; height: 24px; }
+.ios__scroll { padding-top: 48px; will-change: transform; }
+.ios__kop { display: flex; flex-direction: column; gap: 16px; padding: 16px 24px 8px; }
+.ios__titel, .ios__voertuigen { display: flex; justify-content: space-between; align-items: center; }
+.ios__titel b { font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: -.32px; }
+.ios__knop { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 24px; background: var(--vlak); }
+.ios__inhoud { display: flex; flex-direction: column; gap: 8px; padding: 8px 24px 24px; }
+.ios__held { position: relative; height: 300px; display: grid; place-items: center; }
+.ios__held canvas { position: absolute; left: 50%; top: 50%; width: 300px; height: 300px; translate: -50% -50%; }
+.ios__state { position: relative; font-size: 24px; line-height: 32px; letter-spacing: -.24px; color: var(--ok); transition: color .5s; }
+.ios__state.is-warn { color: var(--warn); }
+.ios__kaart { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 24px; background: var(--vlak); }
+.ios__k20 { font-size: 20px; line-height: 28px; letter-spacing: -.1px; }
+.ios__k16 { font-size: 16px; line-height: 24px; color: var(--text-3); }
+.vandaag--in { position: static; width: auto; transform: none !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto; background: var(--vlak); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.ios__tegels { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ios__tegel { display: flex; flex-direction: column; gap: 4px; height: 152px; padding: 20px; border-radius: 24px; background: var(--vlak); }
+.ios__tegel b { font-size: 16px; line-height: 24px; font-weight: 500; }
+.ios__tegel span { font-size: 16px; line-height: 24px; color: var(--text-3); }
+.ios__tegel img, .ios__streep, .ios__batterij { margin-top: auto; }
+.ios__streep { display: flex; gap: 4px; height: 16px; padding-top: 2px; } .ios__streep b { width: 3px; height: 12px; border-radius: 1.5px; background: #fff; } .ios__streep b.d { background: var(--toets); }
+.ios__streep.is-warn b.d { background: var(--warn); }
+.ios__batterij { position: relative; width: 34px; height: 16px; border: 1.25px solid rgba(255, 255, 255, .6); border-radius: 4px; } .ios__batterij b { position: absolute; left: 3px; top: 3px; width: 23px; height: 8px; border-radius: 2px; background: #fff; }
+.push { position: absolute; z-index: 3; left: 12px; right: 12px; top: 14px; display: flex; gap: 12px; padding: 14px 16px 16px; border-radius: 28px; background: rgba(62, 64, 70, .86);
+  -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); box-shadow: 0 18px 44px -14px rgba(0, 0, 0, .7); opacity: 0; transform: translateY(-130%); }
+.push img { flex: none; width: 40px; height: 40px; border-radius: 10px; }
+.push__top { display: flex; justify-content: space-between; font-size: 14px; line-height: 18px; color: var(--text-3); }
+.push__top b { font-weight: 600; color: var(--text-2); }
+.push__t { margin-top: 2px; font-size: 17px; line-height: 22px; font-weight: 600; }
+.push__x { margin-top: 2px; font-size: 16px; line-height: 21px; color: var(--text-2); }
+
+/* ------------------------------------------------------------------ shared for the sections below the opening */
+.wrap { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ------------------------------------------------------------------ the statement: holds in the middle while the words light up; the partners under it */
+.state { position: relative; padding: clamp(32px, 6vw, 80px) var(--gutter) clamp(64px, 8vw, 120px); background: #fff; color: var(--ink); }
+.state--why { padding-bottom: clamp(32px, 6vw, 80px); }
+.state__hold::after { content: ""; display: block; height: 70vh; height: 70svh; }
+.state__pin { position: sticky; top: max(calc(var(--bar) + 16px), calc(50svh - var(--sh, 160px) / 2)); }
+.state__text { max-width: 24ch; margin: 0 auto; text-align: center; font-size: clamp(30px, 1rem + 2.9vw, 58px); line-height: 1.16; letter-spacing: -.03em; text-wrap: balance; }
+.js .state__text .w { color: #c3c5c9; }
+.partners { max-width: 1100px; margin: clamp(40px, 6vw, 72px) auto 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.partners__track { display: flex; align-items: center; gap: clamp(80px, 10vw, 144px); width: max-content; padding: 8px 0; animation: partners 36s linear infinite; }
+.partner { flex: none; opacity: .85; }
+.partner img { display: block; height: 34px; width: auto; }
+.partner--jrc img { height: 40px; } .partner--rabo img { height: 50px; } .partner--metip img { height: 28px; }
+@keyframes partners { to { transform: translateX(-50%); } }
+@media (max-width: 760px) { .partner img { height: 26px; } .partner--jrc img { height: 31px; } .partner--rabo img { height: 38px; } .partner--metip img { height: 22px; } }
+@media (prefers-reduced-motion: reduce) { .state__hold::after { display: none; } .state__pin { position: static; } .partners__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; } .partners__track [aria-hidden] { display: none; } .partners { mask-image: none; -webkit-mask-image: none; } }
+.card { padding: clamp(24px, 2.4vw, 36px); border-radius: var(--r); background: var(--vlak); }
+.fine { font-size: 13px; line-height: 19px; color: var(--text-3); }
+.why a, .details a, .faq a, .join a { text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.h3 { font-size: clamp(32px, 3.4vw, 56px); line-height: 1.04; letter-spacing: -.035em; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ------------------------------------------------------------------ 2 · up close: no frame, the product large, hotspots and pills (after Apple) */
+.look { padding: clamp(96px, 12vw, 160px) 0 clamp(64px, 8vw, 120px); background: var(--bg-1); overflow: hidden; }
+.look__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: end; margin-bottom: clamp(24px, 4vw, 56px); }
+.look__grid { display: grid; grid-template-columns: minmax(300px, 5fr) 7fr; gap: clamp(24px, 3vw, 48px); align-items: center; }
+.look__menu { position: relative; padding-left: 52px; }
+.look__stage { position: relative; height: min(78vh, 760px); min-height: 420px; overflow: hidden; border-radius: var(--r); }
+/* the menu: the team's pills, a + that turns into a −, the answer folds open under it */
+.xf { display: grid; gap: 10px; max-width: 27rem; justify-items: start; }
+.xf__item { width: fit-content; max-width: 100%; border-radius: 28px; background: var(--vlak); transition: background-color .26s var(--ease), width .3s var(--ease); }
+.xf__item.is-open { width: 100%; border-radius: 24px; background: var(--vlak-actief); }
+.xf__pill { display: flex; align-items: center; gap: 13px; width: 100%; min-height: 56px; padding: 12px 22px 12px 14px; border: 0; border-radius: inherit; background: none; color: var(--text); font: 500 16px/22px var(--font); text-align: left; cursor: pointer; }
+.xf__plus { position: relative; flex: none; width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(245, 245, 247, .9); }
+.xf__plus::before, .xf__plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.6px; border-radius: 1px; background: var(--text); translate: -50% -50%; transition: transform .3s var(--ease); }
+.xf__plus::after { transform: rotate(90deg); }
+.xf__item.is-open .xf__plus::after { transform: rotate(0); }
+.xf__more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s var(--ease); }
+.xf__more > div { overflow: hidden; }
+.xf__item.is-open .xf__more { grid-template-rows: 1fr; }
+.xf__more p { max-width: 46ch; padding: 0 24px 22px 58px; font-size: 16px; line-height: 25px; color: var(--text-2); }
+.xf__more .xf__fine { margin-top: -12px; font-size: 13px; line-height: 19px; color: var(--text-3); }
+.look__nav { position: absolute; left: 0; top: 50%; translate: 0 -50%; display: grid; gap: 10px; opacity: 0; visibility: hidden; transition: opacity .24s, visibility 0s .24s; }
+.look__grid.is-open .look__nav { opacity: 1; visibility: visible; transition-delay: 0s; }
+.look__step { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 20px; background: var(--vlak); color: var(--text); cursor: pointer; transition: background-color .2s; }
+.look__step:hover { background: var(--vlak-actief); }
+.look__step[disabled] { opacity: .35; cursor: default; }
+.look__step svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.look__close { position: absolute; right: 16px; top: 16px; z-index: 3; display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 20px; background: var(--vlak-actief); color: var(--text); cursor: pointer; opacity: 0; visibility: hidden; transition: opacity .24s, visibility 0s .24s; }
+.look__grid.is-open .look__close { opacity: 1; visibility: visible; transition-delay: 0s; }
+.look__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+/* in the box: the cable next to the product */
+/* the views: the turntable gives way to the team's photo, the app panel or the box */
+.look__cam { transition: transform 1.1s cubic-bezier(.22, 1, .36, 1), opacity .5s var(--ease); }
+.look__app { position: absolute; left: 50%; top: 28px; width: 402px; transform-origin: 50% 0; transform: translate(-50%, 24px) scale(var(--pk, .9)); opacity: 0; visibility: hidden; transition: opacity .5s var(--ease), transform .6s var(--ease), visibility 0s .5s; pointer-events: none; }
+.look__app { -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 96%); mask-image: linear-gradient(180deg, #000 72%, transparent 96%); }
+.look__stage[data-f="app"] .look__app { opacity: 1; visibility: visible; transform: translate(-50%, 0) scale(var(--pk, .9)); transition-delay: .2s, .2s, 0s; pointer-events: auto; }
+.look__box { position: absolute; inset: 0; pointer-events: none; }
+.look__box-i { position: absolute; max-width: none; opacity: 0; transform: translate3d(0, 28px, 0) scale(.97); transition: opacity .6s var(--ease), transform .8s var(--ease); filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .5)); }
+.look__box-i--cable { left: 8%; top: 50%; width: 30%; height: auto; transform: translate3d(0, calc(-50% + 28px), 0) scale(.97); }
+.look__box-i--ember { left: 44%; top: 50%; width: 13%; height: auto; transform: translate3d(0, calc(-50% + 28px), 0) scale(.97); }
+.look__box-i--sticker { left: 64%; top: 50%; width: 12%; height: auto; transform: translate3d(0, calc(-50% + 28px), 0) scale(.97); }
+.look__stage[data-f="box"] .look__box-i { opacity: 1; transform: translate3d(0, -50%, 0); }
+.look__stage[data-f="box"] .look__box-i--ember { transition-delay: .12s, .12s; } .look__stage[data-f="box"] .look__box-i--sticker { transition-delay: .24s, .24s; }
+.look__box .note { width: auto; padding: 10px 14px; transform: translate(-50%, 0); top: auto; bottom: 14%; }
+.look__box .note--b0 { left: 23%; } .look__box .note--b1 { left: 50.5%; } .look__box .note--b2 { left: 70%; }
+.look__stage[data-f="box"] .look__box .note { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: .5s, .5s, 0s; }
+.xf__steps { display: grid; gap: 12px; padding: 0 22px 8px 58px; }
+.xf__steps li { display: grid; grid-template-columns: 28px 1fr; gap: 0 8px; }
+.xf__steps b { font-size: 12px; line-height: 20px; font-weight: 500; color: var(--text-3); }
+.xf__steps strong { font-size: 15px; line-height: 22px; font-weight: 500; }
+.xf__steps span { grid-column: 2; font-size: 14px; line-height: 20px; color: var(--text-2); }
+.look__cam { position: absolute; inset: 0 0 84px; display: grid; place-items: center; transition: transform 1.1s cubic-bezier(.22, 1, .36, 1); will-change: transform; transform-origin: 50% 50%; }
+.look__prod { position: relative; height: 100%; aspect-ratio: 1 / 3; cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+.look__prod:active { cursor: grabbing; }
+.look__turn, .look__lights { position: absolute; inset: 0; width: 100%; height: 100%; }
+.look__lights { pointer-events: none; }
+.look__plate { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transform: translate(-38%, 6%); transition: opacity .8s var(--ease), transform 1s var(--ease); pointer-events: none; }
+.look__stage[data-f="magnet"] .look__plate { opacity: 1; transform: translate(-26%, 4%); }
+.look__dims { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; opacity: 0; transition: opacity .6s var(--ease); pointer-events: none; }
+.look__dims path { fill: none; stroke: var(--text-2); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.look__dims text { fill: var(--text); font: 500 26px/1 var(--font); text-anchor: middle; }
+.look__stage[data-f="size"] .look__dims { opacity: 1; }
+/* the hotspots: a "+" on the product that opens its note */
+.spot { position: absolute; left: var(--x); top: var(--y); width: 28px; height: 28px; margin: -14px 0 0 -14px; padding: 0; border: 0; border-radius: 14px; background: rgba(245, 245, 247, .18); box-shadow: 0 0 0 1px rgba(245, 245, 247, .35), 0 0 0 6px rgba(245, 245, 247, .08); cursor: pointer; opacity: 0; transition: opacity .4s, transform .3s var(--ease), background-color .3s; transform: scale(var(--k, 1)); }
+.spot::before, .spot::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; margin: -.75px 0 0 -5px; background: var(--text); transition: transform .3s var(--ease); }
+.spot::after { transform: rotate(90deg); }
+.spot.is-near { opacity: 1; }
+.spot[data-f="sensors"] { --x: 50%; --y: 22%; } .spot[data-f="air"] { --x: 50%; --y: 86%; } .spot[data-f="lights"] { --x: 50%; --y: 31.5%; } .spot[data-f="size"] { --x: 50%; --y: 50%; }
+.spot:hover { background: rgba(245, 245, 247, .32); }
+.spot.is-on { background: var(--text); }
+.spot.is-on::before, .spot.is-on::after { background: var(--on-light); }
+.spot.is-on::after { transform: rotate(0); }
+/* the notes */
+.note { position: absolute; left: 50%; top: 50%; width: min(320px, 36vw); padding: 18px 20px; border-radius: 18px; background: rgba(28, 29, 32, .8); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: inset 0 0 0 1px var(--lijn), 0 30px 60px -30px rgba(0, 0, 0, .8); opacity: 0; visibility: hidden; transform: translate(-50%, -40%) translateY(12px); transition: opacity .5s var(--ease), transform .6s var(--ease), visibility 0s .5s; pointer-events: none; }
+.note b { display: block; margin-bottom: 6px; font-size: 17px; line-height: 24px; font-weight: 500; }
+.note span { font-size: 15px; line-height: 22px; color: var(--text-2); }
+.note.is-on { opacity: 1; visibility: visible; transform: translate(-50%, -40%); transition-delay: .35s, .35s, 0s; }
+.note { width: min(260px, 30vw); padding: 14px 16px; }
+.note b { font-size: 15px; line-height: 22px; }
+.note span { font-size: 14px; line-height: 20px; }
+.look__hint { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); font-size: 13px; color: var(--text-3); opacity: 0; transition: opacity .5s; pointer-events: none; }
+.look__stage[data-f="all"] .look__hint { opacity: 1; }
+.look__fine { margin-top: 20px; text-align: center; font-size: 13px; line-height: 18px; color: var(--text-3); }
+@media (max-width: 860px) {
+  .look__head { grid-template-columns: 1fr; }
+  .look__grid { grid-template-columns: 1fr; }
+  .look__menu { order: 2; padding-left: 0; }
+  .look__nav { display: none; }
+  .xf { max-width: none; }
+  .look__stage { height: min(62vh, 560px); }
+  .note { width: min(300px, calc(100vw - 48px)); left: 50%; top: auto; bottom: 40px; transform: translate(-50%, 0) translateY(12px); }
+  .note.is-on { transform: translate(-50%, 0); }
+}
+
+/* ------------------------------------------------------------------ 5 · questions */
+.faq { padding: clamp(96px, 12vw, 180px) 0; background: var(--bg-1); }
+.faq__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+.faq__side { position: sticky; top: calc(var(--bar) + 24px); }
+.faq__grid .d2 { font-size: clamp(40px, 4.6vw, 80px); }
+.faq__list { display: flex; flex-direction: column; gap: 8px; }
+.faq details { border-radius: 20px; background: var(--vlak); transition: background-color .3s; }
+.faq details[open] { background: var(--vlak-actief); }
+.faq summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; list-style: none; cursor: pointer; font-size: 18px; line-height: 26px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; flex: none; width: 14px; height: 14px; transition: transform .3s var(--ease);
+  background: linear-gradient(currentColor, currentColor) center / 14px 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 14px no-repeat; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary:focus-visible { border-radius: 20px; }
+.faq details p { max-width: 62ch; padding: 0 24px 22px; font-size: 16px; line-height: 26px; color: var(--text-2); }
+.faq__img { margin-top: clamp(28px, 3vw, 40px); }
+.faq__img img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); }
+.faq__img figcaption { margin-top: 12px; }
+
+/* ------------------------------------------------------------------ 6 · the waitlist */
+.join { position: relative; padding: clamp(96px, 12vw, 180px) 0; background: var(--ink-0); overflow: hidden; }
+.join__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.join .d2 { font-size: clamp(40px, 4.8vw, 84px); }
+.join .body { margin-top: 24px; }
+.gets { margin-top: 32px; max-width: 560px; }
+.gets li { display: grid; grid-template-columns: 20px 1fr; padding: 14px 0; border-top: 1px solid var(--lijn); font-size: 16px; line-height: 24px; color: var(--text-2); }
+.gets li::before { content: ""; width: 6px; height: 6px; margin-top: 9px; border-radius: 3px; background: var(--ok); }
+.join__form { margin-top: 36px; max-width: 580px; }
+.join__field { display: flex; gap: 8px; padding: 6px; border-radius: 30px; background: var(--vlak); box-shadow: inset 0 0 0 1px var(--lijn); transition: box-shadow .2s; }
+.join__field:focus-within { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45); }
+.join__field input { flex: 1; min-width: 0; height: 48px; padding: 0 18px; border: 0; background: none; color: var(--text); font: 400 17px/1 var(--font); outline: none; }
+.join__field input::placeholder { color: var(--text-3); opacity: .8; }
+.join__field .pill { flex: none; border: 0; cursor: pointer; }
+.join__field .pill[disabled] { opacity: .6; cursor: progress; }
+.join__msg { min-height: 24px; margin-top: 12px; font-size: 15px; line-height: 22px; color: var(--text-2); }
+.join__msg.is-ok { color: var(--ok-t); }
+.join__msg.is-err { color: #f2aba3; }
+.join__form .fine { max-width: 60ch; }
+.join__product { position: relative; width: 100%; max-width: 520px; aspect-ratio: 1; justify-self: center; }
+.join__product canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.join__product img { position: absolute; left: 50%; top: 50%; width: auto; height: 60%; transform: translate(-50%, -50%); filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .6)); }
+
+/* ------------------------------------------------------------------ other formats */
+@media (max-width: 1100px) {
+  .board { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .faq__grid, .join__grid { grid-template-columns: 1fr; }
+      .look__box .note { display: none; }
+  .spec__fig { position: relative; top: 0; }
+  .spec__img { height: min(44vh, 400px); }
+  .faq__side { position: static; }
+  .join__product { max-width: 340px; }
+}
+@media (max-width: 760px) {
+  h1 .ln, h2 .ln, h3 .ln { white-space: normal; }
+  .specs > div { grid-template-columns: 1fr; gap: 2px; padding: 18px 0; }
+  .faq summary { padding: 18px 20px; font-size: 17px; }
+  .faq details p { padding: 0 20px 20px; }
+  .join__field { flex-direction: column; border-radius: 24px; }
+  .join__field input { height: 52px; }
+  .join__field .pill { width: 100%; height: 52px; }
+}
+
+/* reduced motion: the hero only, nothing pinned or scrubbed */
+@media (prefers-reduced-motion: reduce) {
+  .seq { height: auto; } .seq__stage { position: relative; height: 100svh; }
+  .beat:not(.beat--hero), .tags, .vandaag, .phone { display: none; }
+  .js [data-in] { opacity: 1; transform: none; transition: none; }
+}
+
+/* phones on their side: little height, the copy smaller and narrower */
+@media (max-height: 520px) and (min-aspect-ratio: 1/1) {
+  .beat { bottom: 14px; width: min(420px, 42vw); }
+  .beat .d2 { font-size: 30px; }
+  .beat .small { margin-top: 8px; font-size: 13px; line-height: 18px; }
+  .beat--hero { width: auto; }
+  .beat--hero .say { font-size: 34px; }
+  .hero__lead { font-size: 13px; line-height: 18px; max-width: 34ch; }
+  .tag span { display: none; }
+}
+
+/* ------------------------------------------------------------------ the quote, after vastspace.com: a whole screen, the corners marked, the sentence
+   large and left, lighting up word by word; beside it a cloud of dots (stellar.org) turning from the app's ring into Ember */
+.quote { position: relative; background: #fff; color: var(--ink); }
+.quote__hold::after { content: ""; display: block; height: 60vh; height: 60svh; }
+.quote__pin { position: sticky; top: 0; isolation: isolate; height: 100vh; height: 100svh; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; gap: clamp(24px, 4vw, 72px); padding: calc(var(--bar) + 24px) clamp(24px, 5vw, 80px) 48px; }
+.quote__text { max-width: 22ch; font-size: clamp(30px, 3.6vw, 60px); line-height: 1.12; letter-spacing: -.035em; font-weight: 500; text-wrap: pretty; }
+.js .quote__text .w { color: #c3c5c9; }
+.quote__cloud { width: 100%; height: min(70vh, 640px); }
+.quote__mark { position: absolute; z-index: 2; width: 14px; height: 14px; pointer-events: none; }
+.quote__mark::before, .quote__mark::after { content: ""; position: absolute; left: 50%; top: 50%; background: rgba(35, 37, 43, .45); }
+.quote__mark::before { width: 14px; height: 1px; margin: -.5px 0 0 -7px; } .quote__mark::after { width: 1px; height: 14px; margin: -7px 0 0 -.5px; }
+.quote__mark--tl { left: 24px; top: calc(var(--bar) + 8px); } .quote__mark--tr { right: 24px; top: calc(var(--bar) + 8px); }
+.quote__mark--bl { left: 24px; bottom: 24px; } .quote__mark--br { right: 24px; bottom: 24px; }
+@media (max-width: 860px) { .quote__pin { grid-template-columns: 1fr; align-content: center; } .quote__cloud { height: 34vh; order: -1; } }
+@media (prefers-reduced-motion: reduce) { .quote__hold::after { display: none; } .quote__pin { position: static; } }
+
+/* ------------------------------------------------------------------ why, and who: after stellar.org's "Proven through partners" */
+.proof { position: relative; padding: clamp(96px, 12vw, 180px) 0; background: var(--studio); overflow: hidden; }
+.proof__cloud { position: absolute; right: -16%; top: -4%; width: min(60vw, 820px); height: min(60vw, 820px); opacity: .55; pointer-events: none; }
+.proof .wrap { position: relative; }
+.proof .d2 { max-width: 16ch; font-size: clamp(40px, 4.8vw, 84px); }
+.proof__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 980px; margin: clamp(48px, 6vw, 88px) 0 0; }
+.proof__stats > div { padding-top: 20px; border-top: 1px solid var(--lijn); }
+.proof__stats dt { font-size: clamp(36px, 3.6vw, 56px); line-height: 1; letter-spacing: -.03em; }
+.proof__stats dd { margin: 12px 0 0; max-width: 30ch; font-size: 15px; line-height: 22px; color: var(--text-3); }
+.proof__h { margin-top: clamp(72px, 9vw, 128px); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.1; letter-spacing: -.02em; }
+.proof__logos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 1100px; margin-top: 28px; border-top: 1px solid var(--lijn); border-left: 1px solid var(--lijn); }
+.proof__logos li { display: grid; place-items: center; height: clamp(96px, 9vw, 132px); padding: 20px; border-right: 1px solid var(--lijn); border-bottom: 1px solid var(--lijn); }
+.proof__logos img { width: auto; height: 34px; max-width: 80%; object-fit: contain; opacity: .86; }
+.proof__logos li:nth-child(2) img { height: 48px; } .proof__logos li:nth-child(3) img { height: 26px; }
+.proof__text { display: flex !important; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2px; }
+.proof__text span { font-size: 12px; line-height: 16px; color: var(--text-3); } .proof__text b { font-size: 15px; line-height: 20px; font-weight: 500; }
+@media (max-width: 760px) { .proof__stats { grid-template-columns: 1fr; } .proof__logos { grid-template-columns: 1fr 1fr; } .proof__cloud { width: 90vw; height: 90vw; right: -30%; top: 2%; opacity: .5; } }
+
+/* ------------------------------------------------------------------ the closeup v14: the box at true size, the sensor marks */
+.look__stage[data-f="box"] .look__cam { opacity: 0; pointer-events: none; }
+.look__cam { transition: transform 1.1s cubic-bezier(.22, 1, .36, 1), opacity .5s var(--ease); }
+.look__box { position: absolute; left: 4%; right: 4%; top: 50%; margin: 0; transform: translateY(-56%) scale(.96); opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), transform .8s var(--ease), visibility 0s .6s; pointer-events: none; }
+.look__stage[data-f="box"] .look__box { opacity: 1; visibility: visible; transform: translateY(-56%); transition-delay: .25s, .25s, 0s; }
+.look__box img { width: 100%; height: auto; }
+.look__lbl { position: absolute; top: 92%; transform: translateX(-50%); text-align: center; white-space: nowrap; }
+.look__lbl b { display: block; font-size: 15px; line-height: 22px; font-weight: 500; } .look__lbl span { display: block; font-size: 13px; line-height: 18px; color: var(--text-3); }
+.look__lbl--cable { left: 20.5%; } .look__lbl--ember { left: 54.4%; } .look__lbl--sticker { left: 81.1%; }
+.look__ir { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s var(--ease); }
+.look__ir.is-on { opacity: 1; transition-delay: .5s; }
+.look__ir i { position: absolute; top: 24%; width: 3.2%; aspect-ratio: 1; margin: -1.6% 0 0 -1.6%; border-radius: 50%; background: rgba(130, 185, 142, .9); box-shadow: 0 0 0 3px rgba(130, 185, 142, .25), 0 0 10px rgba(130, 185, 142, .9); }
+.look__ir i:nth-child(1) { left: 36.6%; } .look__ir i:nth-child(2) { left: 64.1%; }
+.look__ir .note { left: 72%; top: 24%; width: 150px; padding: 8px 10px; transform: translate(0, -50%) scale(.5); transform-origin: 0 50%; opacity: 1; visibility: visible; }
+.look__ir .note b { font-size: 15px; line-height: 20px; } .look__ir .note span { font-size: 13px; line-height: 18px; }
+@media (max-width: 860px) { .look__lbl span { display: none; } .look__lbl b { font-size: 13px; } }
+
+/* ------------------------------------------------------------------ the questions in the menu's pills */
+.faq .xf { max-width: none; justify-items: stretch; }
+.faq .xf__item { width: 100%; }
+.faq .xf__more p { max-width: 62ch; }
+
+/* ------------------------------------------------------------------ the footer of v10, with the waitlist (after Vast) and the socials */
+.foot__join { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; align-items: start; padding-bottom: 40px; margin-bottom: 40px; border-bottom: 1px solid var(--lijn); }
+.foot__h { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.2; letter-spacing: -.02em; }
+.foot .join__form { margin-top: 0; max-width: none; }
+.foot__social { display: flex; align-items: center; gap: 18px; }
+.foot__social a { display: inline-flex; color: var(--text-3); text-decoration: none; transition: color .2s; }
+.foot__social a:hover { color: var(--text); }
+@media (max-width: 860px) { .foot__join { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------ v15 · the closeup as Apple's: light grey page, a white card, light pills, a slider */
+.look { background: #f5f5f7; color: #1d1d1f; padding: clamp(80px, 10vw, 140px) 0; }
+.look .d2 { color: #1d1d1f; }
+.look__head { margin-bottom: clamp(24px, 3vw, 40px); }
+.look__grid { max-width: 1400px; padding: clamp(28px, 4vw, 64px); border-radius: 32px; background: #fff; box-shadow: 0 1px 0 rgba(0, 0, 0, .03); }
+@media (min-width: 861px) { .look__grid { margin: 0 var(--gutter); width: auto; } }
+.look .xf__item { background: #f0f0f2; }
+.look .xf__item.is-open { background: #e8e8ed; }
+.look .xf__pill { color: #1d1d1f; }
+.look .xf__plus { box-shadow: inset 0 0 0 1.5px #1d1d1f; }
+.look .xf__plus::before, .look .xf__plus::after { background: #1d1d1f; }
+.look .xf__more p { color: #424245; }
+.look .xf__more .xf__fine, .look .xf__steps b { color: #6e6e73; }
+.look .xf__steps span { color: #424245; }
+.look__stage { background: #fff; overflow: hidden; }
+.look__prod { filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .18)); }
+.look__dims path { stroke: #6e6e73; } .look__dims text { fill: #1d1d1f; }
+.look .note { background: rgba(255, 255, 255, .9); color: #1d1d1f; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08), 0 20px 40px -24px rgba(0, 0, 0, .35); }
+.look .note span { color: #6e6e73; }
+.look__lbl b { color: #1d1d1f; } .look__lbl span { color: #6e6e73; }
+.look__box img { filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .18)); }
+/* the slider: drag to turn Ember (Apple's "sleep de schuifknop") */
+.look__stage { padding-bottom: 84px; }
+.look__slider { position: absolute; left: 50%; bottom: 16px; z-index: 3; width: min(340px, 80%); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 13px; line-height: 18px; color: #6e6e73; transition: opacity .4s var(--ease); }
+.look__stage[data-f="box"] .look__slider { opacity: 0; pointer-events: none; }
+.look__slider input { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; margin: 14px 0; border-radius: 3px; background: #d2d2d7; cursor: pointer; }
+.look__slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 64px; height: 36px; border-radius: 18px; border: 0; cursor: grab;
+  background: #1d1d1f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 7l-5 5 5 5M15 7l5 5-5 5'/%3E%3C/svg%3E") center / 20px no-repeat; box-shadow: 0 4px 12px rgba(0, 0, 0, .2); }
+.look__slider input::-moz-range-thumb { width: 64px; height: 36px; border-radius: 18px; border: 0; background: #1d1d1f; cursor: grab; }
+.look__slider input:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 6px; }
+@media (max-width: 860px) { .look__grid { padding: 20px; border-radius: 24px; margin: 0 var(--gutter); width: auto; } .look__menu { padding-top: 8px; } }
+
+/* ------------------------------------------------------------------ v15 · the partners as Stellar's: no frames, the logos large and white */
+.proof__h { font-size: clamp(40px, 4.8vw, 84px); line-height: 1; letter-spacing: -.04em; margin-top: clamp(96px, 10vw, 144px); }
+.proof__logos { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(32px, 4vw, 64px); max-width: none; margin-top: clamp(40px, 5vw, 72px); border: 0; }
+.proof__logos li { height: auto; padding: 0; border: 0; place-items: center start; }
+.proof__logos img { height: 48px; max-width: 100%; opacity: 1; }
+.proof__logos li:nth-child(1) img { height: 52px; } .proof__logos li:nth-child(2) img { height: 70px; } .proof__logos li:nth-child(3) img { height: 40px; }
+.proof__text { align-items: flex-start !important; text-align: left !important; }
+.proof__text span { font-size: 15px; line-height: 20px; } .proof__text b { font-size: 24px; line-height: 28px; letter-spacing: -.02em; }
+@media (max-width: 760px) { .proof__logos { grid-template-columns: 1fr 1fr; gap: 32px 24px; } .proof__logos img { height: 34px !important; } }
+
+/* ================================================================== v16 */
+/* the dots: one fixed layer, from the hero's lights into the quote's star */
+.flow { position: fixed; inset: 0; z-index: 40; width: 100vw; height: 100vh; height: 100svh; pointer-events: none; }
+.quote__cloud { width: 100%; height: min(70vh, 640px); }
+
+/* the app as a panel: no phone, no rim, no status bar; cut off at the bottom */
+.phone { width: 390px; }
+.iphone--panel { width: 390px; height: 760px; padding: 0; border-radius: 32px; background: none; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .85); overflow: hidden; }
+.iphone--panel::before { display: none; }
+.iphone--panel .ios { height: 760px; border-radius: 32px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
+.iphone--panel .ios__scroll { padding-top: 12px; }
+.iphone--panel .push { top: 12px; }
+
+/* Ember up close: the title in the card, above the menu */
+.look { padding: clamp(64px, 8vw, 120px) 0; }
+.look__grid { align-items: center; }
+.look__menu { display: flex; flex-direction: column; gap: clamp(28px, 3vw, 44px); padding-left: 0; }
+.look__title { font-size: clamp(36px, 3.6vw, 60px); line-height: 1.02; letter-spacing: -.04em; color: #1d1d1f; }
+.look .xf { gap: 10px; }
+
+/* partners, after stellar.org */
+.partners { position: relative; padding: clamp(96px, 11vw, 160px) 0 clamp(96px, 11vw, 160px); background: #000; overflow: hidden; }
+.partners__field { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.partners .wrap { position: relative; }
+.partners__title { font-size: clamp(56px, 7vw, 128px); line-height: .98; letter-spacing: -.045em; font-weight: 400; }
+.partners__logos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; gap: clamp(40px, 5vw, 80px) clamp(24px, 3vw, 48px); margin-top: clamp(72px, 9vw, 128px); }
+.partners__logos li { display: flex; align-items: center; min-height: 72px; }
+.partners__logos img { width: auto; max-width: 100%; height: 56px; object-fit: contain; }
+.partners__logos li:nth-child(2) img { height: 72px; } .partners__logos li:nth-child(3) img { height: 44px; }
+.partners__text { flex-direction: column; align-items: flex-start !important; justify-content: center; }
+.partners__text { white-space: nowrap; }
+.partners__text span { font-size: 13px; line-height: 18px; color: var(--text-3); } .partners__text b { font-size: 22px; line-height: 28px; font-weight: 500; letter-spacing: -.02em; }
+@media (max-width: 860px) { .partners__logos { grid-template-columns: 1fr 1fr; } .partners__logos img { height: 40px !important; } }
+.proof { padding-bottom: clamp(64px, 8vw, 120px); }
+
+/* the questions, in the middle */
+.faq__wrap { max-width: 860px; margin: 0 auto; }
+.faq__title { text-align: center; font-size: clamp(40px, 4.6vw, 80px); margin-bottom: clamp(40px, 5vw, 64px); }
+.faq .xf { max-width: none; }
+/* the old statement's marquee rules also matched .partners: undo them for the partner block */
+.partners { max-width: none; margin: 0; -webkit-mask-image: none; mask-image: none; }
+/* phones: the title first, then Ember, then the menu */
+@media (max-width: 860px) {
+  .look__menu { display: contents; }
+  .look__title { order: 1; } .look__stage { order: 2; } .look .xf { order: 3; }
+  .look__grid { gap: 20px; }
+}
+
+/* ================================================================== v18 */
+/* partners: light, no field of dots */
+.partners { background: #f5f5f7; color: #1d1d1f; }
+.partners__title { color: #1d1d1f; }
+.partners__text span { color: #6e6e73; }
+/* the footer's line, centred */
+.foot__legal { text-align: center; }
+/* the app's panel: a very thin stroke */
+.iphone--panel { box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 40px 100px -30px rgba(0, 0, 0, .85); }
+.iphone--panel .ios { box-shadow: none; }
+
+/* ================================================================== v19 */
+/* the hero: a soft light at the bottom (the app's gradient that lifts towards the bottom) */
+.hero__floor { position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 1; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 100%, rgba(236, 238, 242, .13), rgba(236, 238, 242, .05) 45%, rgba(236, 238, 242, 0) 75%); }
+/* the counter, bottom right, over everything */
+.count--corner { position: fixed; right: var(--gutter); bottom: 20px; z-index: 61; margin: 0; padding: 6px 12px; border-radius: 999px; background: rgba(28, 29, 32, .45); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: var(--text-3); }
+.count--corner b { color: var(--text); }
+@media (max-width: 860px) { .count--corner { display: none; } }
+/* partners: dark again, no stars */
+.partners { background: #000; color: var(--text); }
+.partners__title { color: var(--text); }
+.partners__text span { color: var(--text-3); }
+/* Ember up close: the card filled; Ember larger, the menu wider */
+.look__grid { gap: clamp(16px, 2vw, 32px); padding: clamp(24px, 3vw, 48px); }
+@media (min-width: 861px) { .look__grid { grid-template-columns: minmax(320px, 5fr) 7fr; } }
+.look__stage { height: min(86vh, 880px); }
+.look__cam { inset: 0 0 76px; }
+.look__stage { padding-bottom: 76px; }
+.look .xf { max-width: none; }
+.look .xf__item { width: 100%; }
+.look .xf__pill { min-height: 64px; font-size: 18px; line-height: 24px; }
+.look__title { font-size: clamp(44px, 4.4vw, 76px); }
+@media (max-width: 860px) { .look__stage { height: min(70vh, 620px); } .look .xf__pill { min-height: 56px; font-size: 16px; } }
+.count--corner.is-light { background: rgba(255, 255, 255, .7); color: #6e6e73; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); }
+.count--corner.is-light b { color: #1d1d1f; }
+
+/* ================================================================== v20 */
+/* the counter: no background */
+.count--corner, .count--corner.is-light { padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+/* Ember up close: the same space on every side. The title at the top, the menu under it; on the right the product on a
+   grey panel that fills its column, so the card's padding reads the same left, right, above and below */
+@media (min-width: 861px) {
+  .look__grid { align-items: stretch; }
+  .look__menu { justify-content: flex-start; padding-top: 4px; }
+  .look__stage { height: min(80vh, 820px); border-radius: 24px; background: #f5f5f7; }
+}
+.look__stage { background: #f5f5f7; border-radius: 24px; }
+@media (max-width: 860px) {
+  .look__grid { display: flex; flex-direction: column; gap: 20px; padding: 20px; }
+  .look__menu { display: contents; }
+  .look__title { order: 1; } .look__stage { order: 2; width: 100%; height: min(64vh, 560px); } .look .xf { order: 3; width: 100%; }
+}
+
+/* ================================================================== v20 · the phone, gone through section by section */
+@media (max-width: 860px) {
+  /* the quote: the star and the sentence as one group in the middle (the v16 cloud height overruled the phone's) */
+  .quote__pin { gap: 12px; padding: calc(var(--bar) + 8px) 24px 32px; }
+  .quote__cloud { height: 36vh; height: 36svh; }
+  .quote__text { font-size: clamp(26px, 7.4vw, 34px); max-width: 20ch; }
+  /* partners: the logos large enough to read, two by two */
+  .partners { padding: 88px 0; }
+  .partners__title { font-size: clamp(44px, 12vw, 60px); }
+  .partners__logos { gap: 40px 24px; margin-top: 48px; }
+  .partners__logos li:nth-child(1) img { height: 38px !important; } .partners__logos li:nth-child(2) img { height: 52px !important; } .partners__logos li:nth-child(3) img { height: 30px !important; }
+  .partners__text { white-space: normal; } .partners__text b { font-size: 18px; line-height: 22px; }
+  /* questions */
+  .faq { padding: 80px 0; }
+  .faq__title { font-size: clamp(36px, 10vw, 48px); margin-bottom: 32px; }
+  /* the waitlist in the footer: the field and the button each on their own */
+  .foot__join { gap: 16px; padding-bottom: 32px; margin-bottom: 32px; }
+  .join__field { padding: 0; gap: 10px; background: none; box-shadow: none; }
+  .join__field input { height: 52px; padding: 0 20px; border-radius: 26px; background: var(--vlak); box-shadow: inset 0 0 0 1px var(--lijn); }
+  .foot__row { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .foot__nav { gap: 6px 20px; }
+  /* Ember up close */
+  .look { padding: 64px 0; }
+  .look__title { font-size: clamp(40px, 11vw, 52px); }
+}
+@media (max-width: 860px) { .join__field input { flex: none; width: 100%; } }
+
+/* ================================================================== v21 */
+/* 24 at the sides on a phone, as in the app (it was 16) */
+:root { --gutter: clamp(24px, 3.4vw, 48px); }
+
+/* the quote: the AI star in the middle, right under where the ring was, and the sentence centred under it, so that
+   the dots only go down. The words go from white to black (they ran the other way) */
+.quote__pin { grid-template-columns: minmax(0, 1fr); justify-items: center; align-content: center; gap: clamp(24px, 4vh, 40px); text-align: center; }
+.quote__cloud { order: -1; width: min(100%, 560px); height: min(42vh, 440px); height: min(42svh, 440px); }
+.quote__text { max-width: 26ch; font-size: clamp(28px, 3vw, 52px); text-wrap: balance; }
+.js .quote__text .w { color: rgb(222, 223, 226); }
+
+/* Ember up close: 24 everywhere, around the card, inside it and between its parts. The product's panel is lower, so
+   the card sits higher and fits on one screen */
+.look { padding: 24px 0; }
+.look__grid { width: auto; max-width: none; margin-inline: max(24px, calc((100% - 1400px) / 2)); padding: 24px; gap: 24px; }
+@media (min-width: 861px) {
+  .look__menu { gap: 24px; padding-top: 0; }
+  .look__stage { height: min(68vh, 620px); height: min(68svh, 620px); min-height: 460px; }
+}
+
+@media (max-width: 860px) {
+  /* the quote on a phone */
+  .quote__pin { gap: 16px; padding: calc(var(--bar) + 8px) var(--gutter) 32px; }
+  .quote__cloud { height: 34vh; height: 34svh; }
+  .quote__text { font-size: clamp(26px, 7.4vw, 34px); max-width: 20ch; }
+  /* Ember up close on a phone: the title on the left (the column centred it), the product lower, the menu higher */
+  .look { padding: 24px 0; }
+  .look__grid { align-items: stretch; margin-inline: var(--gutter); padding: 24px; gap: 24px; border-radius: 24px; }
+  .look__stage { height: min(50vh, 420px); height: min(50svh, 420px); min-height: 340px; }
+}
+
+/* ================================================================== v22 */
+/* the quote: the sentence on the left again, the AI star on the right (v21 centred them); the dots go down and to the right */
+.quote__pin { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); justify-items: stretch; gap: clamp(24px, 4vw, 72px); text-align: left; }
+.quote__cloud { order: 0; width: 100%; height: min(70vh, 640px); height: min(70svh, 640px); }
+.quote__text { max-width: 22ch; font-size: clamp(30px, 3.6vw, 60px); text-wrap: pretty; }
+@media (max-width: 860px) {
+  .quote__pin { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: calc(var(--bar) + 8px) var(--gutter) 32px; }
+  .quote__cloud { order: -1; height: 34vh; height: 34svh; }
+  .quote__text { font-size: clamp(26px, 7.4vw, 34px); max-width: 20ch; }
+}
+
+/* the card on the app's home: both texts stacked, cross-fading, so its height never changes */
+.ios__kaart { display: grid; }
+.ios__laag { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 8px; transition: opacity .45s var(--ease); }
+.ios__laag--warn, .ios__kaart.is-warn .ios__laag--normaal { opacity: 0; }
+.ios__kaart.is-warn .ios__laag--warn { opacity: 1; }
+
+/* Ember up close: the card 24 from the sides at any width (as above and below), the product on white, and taller */
+.look__grid { margin-inline: 24px; }
+.look__stage { background: #fff; }
+@media (min-width: 861px) {
+  .look__grid { grid-template-columns: clamp(340px, 38%, 600px) minmax(0, 1fr); }
+  .look__stage { height: min(76vh, 700px); height: min(76svh, 700px); }
+}
+@media (max-width: 860px) { .look__stage { height: min(56vh, 470px); height: min(56svh, 470px); } }
+
+/* the waitlist: what you get for it */
+.foot__lead { margin-top: 12px; max-width: 40ch; font-size: 15px; line-height: 22px; color: var(--text-3); text-wrap: pretty; }
+.faq .xf__more a { color: inherit; }
+
+/* ================================================================== v23 */
+/* one left edge for the page: the gutter, as the logo in the bar (the quote stood at 72, the partners at 68) */
+.wrap { max-width: none; }
+.faq__wrap { max-width: 860px; }                    /* the questions keep their column in the middle */
+.quote__pin { padding-left: var(--gutter); padding-right: var(--gutter); }
+/* the hero's title: its E on the logo's edge (the letter's own margin taken off), its baseline as far from the bottom
+   as the gutter is from the side; on a phone on two lines, as on a desktop (the box was 96 px too narrow) */
+.hero__copy { bottom: var(--gutter); }
+.hero__copy h1 { margin: 0 0 -.12em -.08em; }
+@media (max-width: 760px), (max-aspect-ratio: 4/5) { .hero__copy { right: var(--gutter); bottom: 32px; } }
+
+/* Ember up close: 40 around and inside the card (was 24), and the product taller: the card fills the screen under the bar */
+@media (min-width: 861px) {
+  .look { padding: 40px 0; }
+  .look__grid { margin-inline: 40px; padding: 40px; gap: 40px; }
+  .look__menu { gap: 40px; }
+  .look__stage { height: min(calc(100vh - 196px), 720px); height: min(calc(100svh - 196px), 720px); min-height: 480px; }
+}
+@media (max-width: 860px) { .look { padding: 40px 0; } }
+/* a chosen part holds still: the slider only in the zero state */
+.look__stage:not([data-f="all"]) .look__slider { opacity: 0; visibility: hidden; pointer-events: none; }
+.look__stage:not([data-f="all"]) .look__prod { cursor: default; }
+/* in the box: the names under the three things, centred on each (measured in box.webp: 21.1, 54.6, 81.1 %; lowest at 90.5 %) */
+.look__lbl { top: calc(90.5% + 20px); }
+.look__lbl--cable { left: 21.1%; } .look__lbl--ember { left: 54.6%; } .look__lbl--sticker { left: 81.1%; }
+
+/* the waitlist in the footer: the title at the page's own size, the line under it, the form beside it on the same
+   baseline; the field and the button the app's heights (64 and 52), one radius */
+.foot { padding-top: clamp(72px, 9vw, 128px); }
+.foot__join { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px clamp(40px, 6vw, 96px); align-items: end; padding-bottom: clamp(56px, 6vw, 88px); margin-bottom: 40px; }
+.foot__h { font-size: clamp(40px, 4.6vw, 80px); line-height: 1; letter-spacing: -.04em; }
+.foot__lead { margin-top: 24px; max-width: 40ch; font-size: 18px; line-height: 28px; }
+.foot .join__form { width: 100%; max-width: 620px; justify-self: end; }
+.foot .join__field { height: 64px; padding: 6px; border-radius: 32px; gap: 8px; align-items: center; }
+.foot .join__field input { height: 52px; padding: 0 20px; font-size: 17px; }
+.foot .join__field .pill { height: 52px; padding: 0 28px; border-radius: 26px; }
+.foot .join__msg { min-height: 22px; margin: 12px 0 0 20px; }
+@media (max-width: 860px) {
+  .foot__join { grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+  .foot__h { font-size: clamp(36px, 10vw, 48px); }
+  .foot__lead { margin-top: 16px; font-size: 16px; line-height: 24px; }
+  .foot .join__form { max-width: none; justify-self: stretch; }
+  .foot .join__field { flex-direction: column; height: auto; padding: 0; gap: 12px; border-radius: 0; background: none; box-shadow: none; }
+  .foot .join__field input { width: 100%; height: 56px; padding: 0 22px; border-radius: 28px; background: var(--vlak); box-shadow: inset 0 0 0 1px var(--lijn); }
+  .foot .join__field .pill { width: 100%; height: 56px; border-radius: 28px; }
+  .foot .join__msg { margin-left: 0; }
+  .foot .join__field input:focus-visible { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45); }
+}
+/* the panel ends under its last card: what follows stays in place but out of sight (on a phone the chart as well) */
+.iphone--panel .ios__tegels { visibility: hidden !important; }
+
+/* ================================================================== v24 */
+/* the chart with attention, as Figma v11 · H2: a scale of 20° and 40° with two grid lines (H1, all normal: 15° and 20°) */
+.grafiek__raster--2 { top: 121px; opacity: 0; transition: opacity .3s var(--ease); }
+.vandaag.is-warn .grafiek__raster--2 { opacity: 1; }
+.vandaag.is-warn .grafiek__raster:not(.grafiek__raster--2) { top: 45px; }
+.vandaag.is-warn .grafiek__as--20 { left: 282px; top: 37px; }
+.vandaag.is-warn .grafiek__as--15 { left: 283px; top: 113px; }
+
+/* Ember up close: taller again */
+@media (min-width: 861px) { .look__stage { height: min(86vh, 800px); height: min(86svh, 800px); min-height: 520px; } }
+@media (max-width: 860px) { .look__stage { height: min(62vh, 520px); height: min(62svh, 520px); } }
+
+/* the waitlist: under the questions, in the same middle column: the title, one line, the field with its button */
+.foot__join { display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
+.foot__intro { display: flex; flex-direction: column; align-items: center; }
+.foot__lead { margin-top: 16px; max-width: 44ch; }
+.foot .join__form { width: 100%; max-width: 560px; justify-self: auto; }
+.foot .join__msg { margin: 12px 0 0; text-align: center; }
+@media (max-width: 860px) { .foot__join { gap: 28px; } .foot .join__form { max-width: none; } }
+
+/* ================================================================== v25 */
+/* the state card with the battery's temperature on the right, as Figma v12 · H1 (21°) and H2 (38°) */
+.ios__laag { flex-direction: row; align-items: flex-start; gap: 16px; }
+.ios__tekst { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.ios__temp { flex: none; display: flex; flex-direction: column; align-items: flex-end; }
+.ios__temp b { font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: -.32px; color: var(--text); font-variant-numeric: tabular-nums; }
+.ios__temp span { font-size: 12px; line-height: 16px; color: var(--text-3); }
+
+/* partners: the dark grey of the questions under them (not black), the logos a step softer than white */
+.partners { background: var(--bg-1); padding-bottom: clamp(56px, 6vw, 96px); }
+.partners__logos img, .partners__text { opacity: .7; }
+.faq { padding-top: clamp(56px, 7vw, 112px); }
+
+/* the footer: the waitlist on the left, Ember on the right as in the hero, its foot fading into the dark */
+.foot__join { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: center; gap: 40px clamp(40px, 6vw, 96px); text-align: left; padding-bottom: 0; }
+.foot__main { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
+.foot__intro { align-items: flex-start; }
+.foot__lead { max-width: 40ch; }
+.foot .join__form { width: 100%; max-width: 560px; }
+.foot .join__msg { margin: 12px 0 0 20px; text-align: left; }
+.foot__ember { position: relative; align-self: stretch; height: clamp(380px, 36vw, 540px); overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 100%); mask-image: linear-gradient(180deg, #000 58%, transparent 100%); }
+.foot__floor { position: absolute; left: 0; right: 0; bottom: 0; height: 70%; pointer-events: none;
+  background: radial-gradient(70% 80% at 50% 100%, rgba(236, 238, 242, .11), rgba(236, 238, 242, .04) 45%, rgba(236, 238, 242, 0) 75%); }
+.foot__prod { position: absolute; left: 50%; top: 24px; width: clamp(180px, 17vw, 260px); aspect-ratio: 1 / 2; transform: translateX(-50%); background: url(assets/img/ember-flip.webp?v=53) 0 0 / 800% 200% no-repeat; }
+.foot__prod i { position: absolute; width: 2.9%; aspect-ratio: 1; margin: -1.45% 0 0 -1.45%; border-radius: 50%; background: #fff8ec; opacity: .14; transition: opacity .6s var(--ease); }
+.foot__prod.is-on i { opacity: 1; }
+@media (max-width: 860px) {
+  .foot__join { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .foot__ember { order: -1; height: 300px; }
+  .foot__prod { width: 140px; top: 8px; }
+  .foot__main { gap: 24px; padding-bottom: 40px; }
+  .foot .join__form { max-width: none; }
+  .foot .join__msg { margin-left: 0; }
+}
+
+/* ================================================================== v26 */
+/* the state card: the temperature on the left and the state beside it, on one line; no running text */
+.ios__laag { align-items: center; gap: 16px; }
+.ios__temp { flex: none; display: block; font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: -.32px; color: var(--text); font-variant-numeric: tabular-nums; }
+.ios__laag .ios__k20 { flex: 1; min-width: 0; }
+
+/* partners: a dark grey of its own, a step lighter than the questions under them, so the two read as two sections */
+.partners { background: var(--bg-2); }
+
+/* the footer smaller; Ember larger and lower, its foot going out of the frame at the line, as in the hero */
+.foot { padding-top: clamp(48px, 6vw, 88px); }
+.foot__join { margin-bottom: 32px; }
+.foot__main { gap: 24px; }
+.foot__h { font-size: clamp(36px, 3.8vw, 64px); }
+.foot__ember { align-self: end; height: clamp(300px, 28vw, 420px); -webkit-mask-image: none; mask-image: none; }
+.foot__prod { width: clamp(220px, 20vw, 300px); top: clamp(32px, 4vw, 56px); }
+.foot__floor { height: 80%; background: radial-gradient(60% 70% at 50% 100%, rgba(236, 238, 242, .12), rgba(236, 238, 242, .04) 50%, rgba(236, 238, 242, 0) 78%); }
+@media (max-width: 860px) {
+  .foot__ember { align-self: stretch; height: 240px; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%); }   /* above the text there is no line to cut on */
+  .foot__prod { width: 150px; top: 24px; }
+}
+
+/* ================================================================== v27 */
+/* in the box: only the names, about 24 px under the things (their lowest point is at 90.5 % of the picture) */
+.look__lbl { top: calc(90.5% + 24px); }
+.look__lbl b { font-size: 15px; line-height: 20px; }
+@media (max-width: 860px) { .look__lbl b { font-size: 13px; line-height: 18px; } }
+
+/* the footer: less room above, Ember larger and its foot further out of the frame */
+.foot { padding-top: clamp(32px, 4vw, 56px); }
+.foot__ember { height: clamp(280px, 26vw, 380px); }
+.foot__prod { width: clamp(240px, 23vw, 340px); top: clamp(24px, 2.4vw, 36px); }
+@media (max-width: 860px) {
+  .foot { padding-top: 24px; }
+  .foot__ember { height: 250px; }
+  .foot__prod { width: 170px; top: 16px; }
+}
+/* the box's figure kept bottom: 0 from an older rule (inset: 0), so it stretched to the foot of the stage and the names sat far
+   under the things; it is as tall as its picture now. On a phone the names may break, so they do not run into each other */
+.look__box { bottom: auto; }
+@media (max-width: 860px) { .look__lbl { width: 30%; white-space: normal; text-align: center; } }
+@media (max-width: 860px) { .look__lbl--cable { width: 40%; } .look__lbl--ember { width: 20%; } }   /* "USB-C-kabel" on one line */
+
+/* ================================================================== v28 */
+/* the hero: a black gradient from the bottom over Ember (as in v13), so its foot sinks into the studio black; it replaces
+   the soft light of v19 and sits above Ember, under its lights and the headline */
+.hero__floor { z-index: 4; height: 48%; background: linear-gradient(0deg, var(--studio) 0%, rgba(7, 9, 10, .9) 14%, rgba(7, 9, 10, .55) 32%, rgba(7, 9, 10, 0) 100%); }
+
+/* the footer, recomposed: on the left the waitlist on one vertical rhythm (title, 24, line, 32, form), on the right Ember as
+   tall as that column, its foot sinking into the same black gradient; then one line for the logo, the links and the socials */
+.foot { padding-top: 0; }
+.foot__join { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: stretch; gap: 0 clamp(40px, 6vw, 96px); margin-bottom: 0; padding-bottom: 0; border-bottom: 1px solid var(--lijn); }
+.foot__main { align-self: center; gap: 0; padding: clamp(56px, 5vw, 72px) 0 clamp(48px, 4.4vw, 64px); }
+.foot__h { font-size: clamp(40px, 4vw, 64px); line-height: 1; letter-spacing: -.04em; }
+.foot__lead { margin-top: 24px; max-width: 36ch; font-size: 18px; line-height: 28px; }
+.foot .join__form { margin-top: 32px; max-width: 520px; }
+.foot__ember { align-self: stretch; height: auto; min-height: clamp(380px, 32vw, 480px); }
+.foot__prod { width: clamp(260px, 26vw, 400px); top: clamp(40px, 3.6vw, 56px); }
+.foot__floor { display: none; }
+.foot__ember::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 62%; pointer-events: none;
+  background: linear-gradient(0deg, var(--ink-0) 0%, rgba(17, 18, 20, .92) 16%, rgba(17, 18, 20, .55) 40%, rgba(17, 18, 20, 0) 100%); }
+.foot__row { padding-top: 32px; }
+.foot__legal { margin-top: 24px; }
+@media (max-width: 860px) {
+  .foot__join { grid-template-columns: minmax(0, 1fr); }
+  .foot__ember { order: -1; min-height: 0; height: 280px; -webkit-mask-image: none; mask-image: none; }
+  .foot__prod { width: 180px; top: 24px; }
+  .foot__main { padding: 0 0 48px; }
+  .foot__h { font-size: clamp(36px, 10vw, 48px); }
+  .foot__lead { margin-top: 16px; font-size: 16px; line-height: 24px; }
+  .foot .join__form { margin-top: 28px; }
+}
+
+/* ================================================================== v29 */
+/* the footer as one: the waitlist on the left, the information that was the line at the bottom in the middle, Ember on the
+   right from the top to the end of the page, sinking into the black there; the legal line under the first two */
+.foot { padding: 0 var(--gutter); }
+.foot__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr); grid-template-rows: auto auto; column-gap: clamp(32px, 4vw, 72px); }
+.foot__main { grid-column: 1; grid-row: 1; align-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: clamp(64px, 6vw, 96px) 0 0; }
+.foot__info { grid-column: 2; grid-row: 1; align-self: start; display: flex; flex-direction: column; gap: 32px; padding-top: clamp(72px, 6.6vw, 104px); }
+.foot__mark { width: 104px; height: auto; opacity: .9; }
+.foot__cols { display: grid; grid-template-columns: repeat(2, max-content); gap: 24px clamp(32px, 3vw, 48px); }
+.foot__col { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.foot__col b { margin-bottom: 4px; font-size: 13px; line-height: 20px; font-weight: 500; color: var(--text-3); }
+.foot__col a { font-size: 16px; line-height: 24px; color: var(--text-2); text-decoration: none; transition: color .2s; }
+.foot__col a:hover { color: var(--text); }
+.foot__legal { grid-column: 1 / 3; grid-row: 2; align-self: end; margin: 0; padding: clamp(48px, 4.4vw, 64px) 0 32px; text-align: left; font-size: 13px; line-height: 18px; color: var(--text-3); opacity: .8; }
+.foot__ember { grid-column: 3; grid-row: 1 / 3; align-self: stretch; height: auto; min-height: clamp(440px, 38vw, 580px); }
+@media (max-width: 1100px) { .foot__cols { grid-template-columns: max-content; } }
+@media (max-width: 860px) {
+  .foot__grid { grid-template-columns: minmax(0, 1fr); }
+  .foot__ember { grid-column: 1; grid-row: 1; height: 280px; min-height: 0; }
+  .foot__main { grid-row: 2; padding: 0; }
+  .foot__info { grid-column: 1; grid-row: 3; gap: 24px; padding-top: 56px; }
+  .foot__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .foot__legal { grid-column: 1; grid-row: 4; padding: 40px 0 32px; }
+}
+.foot .join__form { width: 100%; max-width: 520px; margin-top: 32px; }                     /* the form's rules hung on .foot__join, gone since v29 */
+@media (max-width: 860px) { .foot .join__form { max-width: none; margin-top: 28px; } }
+
+/* ================================================================== v30 · three footers to choose from (?footer=a|b|c, b by default)
+   One grid for all three. Every part sits on the same lines: the gutter on the left, one top line (the title, the logo
+   and the headings of the links start on it), one bottom line (the legal text). Ember spans every row on the right, from
+   the top of the footer to the end of the page, its foot in the black gradient. Empty rows hold the space above and below. */
+.foot { --ft: clamp(72px, 6.6vw, 104px); padding: 0 var(--gutter); }
+.foot__grid { column-gap: clamp(32px, 4vw, 64px); row-gap: 0; align-items: start; }
+.foot__main { grid-area: main; padding: 0; }
+.foot__mark { grid-area: mark; width: 112px; height: auto; margin-top: 2px; opacity: .92; }
+.foot__col--page { grid-area: page; } .foot__col--contact { grid-area: cont; }
+.foot__legal { grid-area: legal; align-self: end; padding: 0; margin: 0; text-align: left; }
+.foot__ember { grid-area: ember; align-self: stretch; min-height: clamp(460px, 40vw, 600px); }
+.foot__col b { margin-bottom: 8px; }
+
+/* A · the links on the left (the logo above them), the waitlist on the right beside Ember */
+.foot[data-v="a"] .foot__grid {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) minmax(0, 4.4fr) minmax(0, 3.6fr);
+  grid-template-rows: var(--ft) auto 40px auto 1fr auto 32px;
+  grid-template-areas: ".     .     .     ember" "mark  mark  main  ember" ".     .     main  ember" "page  cont  main  ember" ".     .     main  ember" "legal legal legal ember" ".     .     .     ember"; }
+.foot[data-v="a"] .foot__legal { padding-top: 48px; }
+
+/* B · as OpenAI's: one column on the left (the waitlist, under it the logo and the links in columns, then the legal
+   line), Ember on the right */
+.foot[data-v="b"] .foot__grid {
+  grid-template-columns: repeat(3, minmax(0, 2fr)) minmax(0, 5fr);
+  grid-template-rows: clamp(56px, 5vw, 80px) auto 56px auto 40px auto 32px;
+  grid-template-areas: ".     .     .     ember" "main  main  main  ember" ".     .     .     ember" "mark  page  cont  ember" ".     .     .     ember" "legal legal legal ember" ".     .     .     ember"; }
+
+/* C · v29 set straight: the waitlist on the left and the links beside it, on the same top line; the logo at the bottom
+   left with the legal line under it */
+.foot[data-v="c"] .foot__grid {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 1.6fr) minmax(0, 1.6fr) minmax(0, 4fr);
+  grid-template-rows: var(--ft) auto 56px auto 16px auto 32px;
+  grid-template-areas: ".     .     .     ember" "main  page  cont  ember" ".     .     .     ember" "mark  .     .     ember" ".     .     .     ember" "legal legal legal ember" ".     .     .     ember"; }
+
+/* phones: the same order for all three: Ember, the waitlist, the links in two columns, the logo, the legal line */
+@media (max-width: 860px) {
+  .foot[data-v] .foot__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 48px auto 40px auto 16px auto 32px;
+    grid-template-areas: "ember ember" "main main" ". ." "page cont" ". ." "mark mark" ". ." "legal legal" ". ."; }
+  .foot__ember { min-height: 0; height: 280px; }
+  .foot[data-v="a"] .foot__legal { padding-top: 0; }
+}
+
+/* ================================================================== v31 · five footers (?footer=a to e)
+   For all five: the AvenNex logo on the left, the line under the title on two lines, the links in three short groups
+   (Ember, Contact, Volg ons). The same lines as v30: the gutter, one top line, one bottom line; Ember through every row. */
+.foot__col--g1 { grid-area: g1; } .foot__col--g2 { grid-area: g2; } .foot__col--g3 { grid-area: g3; }
+.foot__col { gap: 6px; }
+.foot__col a { font-size: 15px; line-height: 24px; }
+.foot__lead { max-width: 46ch; text-wrap: balance; }
+
+/* A · the logo and the three groups on the left, the waitlist beside Ember */
+.foot[data-v="a"] .foot__grid {
+  grid-template-columns: repeat(3, minmax(0, 1.25fr)) minmax(0, 4fr) minmax(0, 3.4fr);
+  grid-template-rows: var(--ft) auto 40px auto 1fr auto 32px;
+  grid-template-areas: ".    .    .    .    ember" "mark mark mark main ember" ".    .    .    main ember" "g1   g2   g3   main ember" ".    .    .    main ember" "legal legal legal legal ember" ".    .    .    .    ember"; }
+
+/* B · as OpenAI's: the waitlist, under it the logo and the three groups in a row, then the legal line; Ember on the right */
+.foot[data-v="b"] .foot__grid {
+  grid-template-columns: repeat(4, minmax(0, 1.5fr)) minmax(0, 4.4fr);
+  grid-template-rows: clamp(56px, 5vw, 80px) auto 56px auto 40px auto 32px;
+  grid-template-areas: ".    .    .    .    ember" "main main main main ember" ".    .    .    .    ember" "mark g1   g2   g3   ember" ".    .    .    .    ember" "legal legal legal legal ember" ".    .    .    .    ember"; }
+
+/* C · the waitlist and the three groups on one top line; the logo bottom left, the legal line under it */
+.foot[data-v="c"] .foot__grid {
+  grid-template-columns: minmax(0, 4fr) repeat(3, minmax(0, 1.25fr)) minmax(0, 3.6fr);
+  grid-template-rows: var(--ft) auto 56px auto 16px auto 32px;
+  grid-template-areas: ".    .    .    .    ember" "main g1   g2   g3   ember" ".    .    .    .    ember" "mark .    .    .    ember" ".    .    .    .    ember" "legal legal legal legal ember" ".    .    .    .    ember"; }
+
+/* D · compact: the title on the left, the line and the field beside it; under them the logo and the three groups */
+.foot[data-v="d"] .foot__grid {
+  grid-template-columns: repeat(4, minmax(0, 1.5fr)) minmax(0, 4.4fr);
+  grid-template-rows: clamp(56px, 5vw, 80px) auto auto 56px auto 40px auto 32px;
+  grid-template-areas: ".     .     .    .    ember" "title title lead lead ember" "title title form form ember" ".     .     .    .    ember" "mark  g1    g2   g3   ember" ".     .     .    .    ember" "legal legal legal legal ember" ".     .     .    .    ember"; }
+@media (min-width: 861px) {
+  .foot[data-v="d"] .foot__main, .foot[data-v="d"] .foot__intro { display: contents; }
+  .foot[data-v="d"] .foot__h { grid-area: title; }
+  .foot[data-v="d"] .foot__lead { grid-area: lead; margin-top: 6px; font-size: 16px; line-height: 24px; }
+  .foot[data-v="d"] .join__form { grid-area: form; margin-top: 24px; }
+}
+
+/* E · the logo on top as the footer's head; under it the waitlist with the three groups beside it */
+.foot[data-v="e"] .foot__grid {
+  grid-template-columns: minmax(0, 4fr) repeat(3, minmax(0, 1.25fr)) minmax(0, 3.6fr);
+  grid-template-rows: clamp(56px, 5vw, 80px) auto 48px auto 56px auto 32px;
+  grid-template-areas: ".    .    .    .    ember" "mark .    .    .    ember" ".    .    .    .    ember" "main g1   g2   g3   ember" ".    .    .    .    ember" "legal legal legal legal ember" ".    .    .    .    ember"; }
+
+/* phones, all five the same: Ember, the waitlist, the groups (two and one), the logo, the legal line */
+@media (max-width: 860px) {
+  .foot[data-v] .foot__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 48px auto 32px auto 40px auto 16px auto 32px;
+    grid-template-areas: "ember ember" "main main" ". ." "g1 g2" ". ." "g3 ." ". ." "mark mark" ". ." "legal legal" ". ."; }
+}
+
+/* ================================================================== v32 · footer A, chosen, set straight
+   Two lines: the logo and the title start on the top line; the three groups and the line under the title start on the
+   second line, the field under that line. The line and the field are exactly as wide as the title (5.4 em of it), so the
+   button ends where "wachtlijst." ends. The title at the size of the questions' title. */
+.foot[data-v="a"] { --fh: clamp(48px, 4.6vw, 66px); --measure: max(320px, calc(var(--fh) * 5.4)); }
+@media (min-width: 861px) {   /* desktop only: on a phone the shared order of v31 holds */
+  .foot[data-v="a"] .foot__grid {
+    grid-template-columns: repeat(3, minmax(0, 1.2fr)) minmax(0, 4.6fr) minmax(0, 3.4fr);
+    grid-template-rows: var(--ft) auto 32px auto auto 1fr auto 32px;
+    grid-template-areas: ".     .     .     .     ember" "mark  mark  mark  title ember" ".     .     .     .     ember" "g1    g2    g3    lead  ember" "g1    g2    g3    form  ember" ".     .     .     .     ember" "legal legal legal legal ember" ".     .     .     .     ember"; }
+  .foot[data-v="a"] .foot__main, .foot[data-v="a"] .foot__intro { display: contents; }
+  .foot[data-v="a"] .foot__h { grid-area: title; font-size: var(--fh); }
+  .foot[data-v="a"] .foot__lead { grid-area: lead; margin: 0; max-width: var(--measure); }
+  .foot[data-v="a"] .join__form { grid-area: form; margin-top: 24px; max-width: var(--measure); }
+  .foot[data-v="a"] .foot__legal { padding-top: 56px; }
+}
+
+/* ================================================================== v33 · footer F: one column on the left, in reading order
+   The logo at the top left; the title with its line; the field; the three groups right under the field; the legal line
+   at the bottom. Ember large on the right, from the top of the footer to the end of the page. The line and the field are
+   as wide as the title, so the button ends where "wachtlijst." ends; the groups start on the field's left edge. */
+.foot[data-v="f"] { --fh: clamp(48px, 4.6vw, 66px); --measure: max(320px, calc(var(--fh) * 5.4)); }
+@media (min-width: 861px) {
+  .foot[data-v="f"] .foot__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 4.2fr);
+    grid-template-rows: clamp(56px, 5vw, 80px) auto 48px auto auto auto 48px auto 48px auto 32px;
+    grid-template-areas: ".     .     .     ember" "mark  mark  mark  ember" ".     .     .     ember" "title title title ember" "lead  lead  lead  ember" "form  form  form  ember" ".     .     .     ember" "g1    g2    g3    ember" ".     .     .     ember" "legal legal legal ember" ".     .     .     ember"; }
+  .foot[data-v="f"] .foot__main, .foot[data-v="f"] .foot__intro { display: contents; }
+  .foot[data-v="f"] .foot__h { grid-area: title; font-size: var(--fh); }
+  .foot[data-v="f"] .foot__lead { grid-area: lead; margin-top: 24px; max-width: var(--measure); }
+  .foot[data-v="f"] .join__form { grid-area: form; margin-top: 32px; max-width: var(--measure); }
+}
+@media (max-width: 860px) {
+  .foot[data-v="f"] .foot__grid {
+    grid-template-rows: 40px auto 8px auto auto 48px auto 32px auto 40px auto 32px;
+    grid-template-areas: ". ." "mark mark" ". ." "ember ember" "main main" ". ." "g1 g2" ". ." "g3 ." ". ." "legal legal" ". ."; }
+}
+@media (min-width: 861px) { .foot[data-v="f"] .foot__prod { width: clamp(280px, 30vw, 460px); } }   /* F is taller: Ember larger, so its foot still goes out of the frame */
+
+/* ================================================================== v34 · footer G: the waitlist as one horizontal piece
+   The logo at the top left. Under it one row: the title with its line on the left, the field with Versturen on the right,
+   their bottoms on one line. Under that the three groups, then the legal line. Ember on the right through every row.
+   Lower than F, and on a wide screen the field fills the room that stood empty. */
+.foot[data-v="g"] { --fh: clamp(44px, 4vw, 64px); }
+@media (min-width: 861px) {
+  .foot[data-v="g"] .foot__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 3.2fr);
+    grid-template-rows: clamp(48px, 4.4vw, 72px) auto 40px auto 56px auto 48px auto 32px;
+    grid-template-areas: ".     .     .    .    ember" "mark  mark  mark mark ember" ".     .     .    .    ember" "intro intro form form ember" ".     .     .    .    ember" "g1    g2    g3   .    ember" ".     .     .    .    ember" "legal legal legal legal ember" ".     .     .    .    ember"; }
+  .foot[data-v="g"] .foot__main { display: contents; }
+  .foot[data-v="g"] .foot__intro { grid-area: intro; }
+  .foot[data-v="g"] .foot__h { font-size: var(--fh); }
+  .foot[data-v="g"] .foot__lead { margin-top: 20px; max-width: 40ch; }
+  /* the field sits on the bottom line of the text; the message hangs under it, so it does not lift the field */
+  .foot[data-v="g"] .join__form { grid-area: form; align-self: end; position: relative; margin: 0; max-width: none; }
+  .foot[data-v="g"] .join__msg { position: absolute; left: 20px; right: 0; top: 100%; margin: 8px 0 0; }
+  .foot[data-v="g"] .foot__prod { width: clamp(260px, 26vw, 400px); }
+}
+@media (max-width: 860px) {
+  .foot[data-v="g"] .foot__grid {
+    grid-template-rows: 40px auto 8px auto auto 48px auto 32px auto 40px auto 32px;
+    grid-template-areas: ". ." "mark mark" ". ." "ember ember" "main main" ". ." "g1 g2" ". ." "g3 ." ". ." "legal legal" ". ."; }
+}
+
+/* ================================================================== v36
+   The story in four steps: what Ember does (hero), how (the statement, with the expected pattern in dots instead of the
+   AI star), how you use it (the bike and the app, through the app's four states), the details; then getting started in
+   four tiles from the app, the figures, the partners, the questions. */
+
+/* the hero: one clear call to action under the headline, in outline; the bar's button is Contact */
+.pill--line { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px rgba(245, 245, 247, .55); }
+.pill--line:hover { background: rgba(245, 245, 247, .08); box-shadow: inset 0 0 0 1px rgba(245, 245, 247, .9); }
+.hero__copy { gap: 32px; }
+.hero__cta { pointer-events: auto; }
+@media (max-width: 760px), (max-aspect-ratio: 4/5) { .hero__copy { gap: 20px; } .hero__cta { height: 48px; padding: 0 24px; } }
+/* the hero's Ember is its own still, rendered larger (3d/ember_scene.py mode=flip w=1350): sharp at full size */
+.hero__ember { background: url(assets/img/ember-hero.webp?v=53) 0 0 / 100% 100% no-repeat; }
+
+/* the statement: the labels of the pattern the dots fold into (placed by main.js on the dots' own coordinates) */
+.quote__cloud { position: relative; }
+.fc { position: absolute; left: 0; top: 0; z-index: 2; font-size: 13px; line-height: 16px; font-weight: 500; color: #8a8d94; white-space: nowrap; opacity: 0; transition: opacity .6s var(--ease); pointer-events: none; }
+.fc--nu { color: var(--ink); }
+.fc--line { color: #3f8a53; }
+.fc--dev { color: #c97a10; transition: none; }
+.quote__cloud.is-on .fc--dev { opacity: 0; }
+.quote__cloud.is-on .fc { opacity: 1; }
+
+/* the bike's story: each state named as in the app, a dot in its colour */
+.state { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 20px; padding: 6px 14px 6px 12px; border-radius: 16px; background: var(--vlak); font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text-2); }
+.state i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(130, 185, 142, .18); }
+.state--warn i { background: var(--warn); box-shadow: 0 0 0 4px rgba(232, 162, 58, .2); }
+.state--danger i { background: var(--danger); box-shadow: 0 0 0 4px rgba(226, 77, 66, .22); }
+.state--idle i { background: #8e959d; box-shadow: 0 0 0 4px rgba(142, 149, 157, .2); }
+@media (max-width: 760px), (max-aspect-ratio: 4/5) { .state { margin-bottom: 12px; font-size: 13px; padding: 4px 12px 4px 10px; } }
+/* the app's card: four states over each other, one shown (the card keeps its height) */
+.ios__laag--heet, .ios__laag--geen { opacity: 0; }
+.ios__kaart[data-s] .ios__laag { opacity: 0; }
+.ios__kaart[data-s="normaal"] .ios__laag--normaal, .ios__kaart[data-s="aandacht"] .ios__laag--warn,
+.ios__kaart[data-s="oververhit"] .ios__laag--heet, .ios__kaart[data-s="geen"] .ios__laag--geen { opacity: 1; }
+.ios__laag--heet .ios__temp { color: var(--danger); }
+.ios__laag--geen .ios__temp, .ios__laag--geen .ios__k20 { color: var(--text-3); }
+.ios__state.is-danger { color: var(--danger); }
+.ios__state.is-idle { color: #8e959d; }
+.push.is-danger { box-shadow: inset 0 0 0 2px rgba(226, 77, 66, .9); }
+
+/* 5 · getting started: four tiles, each the app screen of that step, as the app's own tiles (24 radius, its grey) */
+.steps { padding: clamp(96px, 11vw, 160px) 0; background: var(--ink-0); }
+.steps__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px 48px; flex-wrap: wrap; margin-bottom: clamp(40px, 5vw, 72px); }
+.steps__head .d2 { font-size: clamp(40px, 4.6vw, 80px); }
+.steps__lead { max-width: 34ch; margin: 0 0 6px; font-size: 18px; line-height: 28px; color: var(--text-3); }
+.steps__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.tile { display: flex; flex-direction: column; overflow: hidden; border-radius: 24px; background: #232428; }
+.tile__screen { position: relative; height: clamp(240px, 21vw, 340px); overflow: hidden; display: flex; justify-content: center; padding-top: 28px; background: linear-gradient(180deg, #2b2c31, #232428); }
+.tile__screen img { width: 74%; height: auto; align-self: flex-start; border-radius: 28px 28px 0 0; box-shadow: 0 0 0 1px rgba(255, 255, 255, .07), 0 30px 60px -30px rgba(0, 0, 0, .8); }
+.tile__screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%; background: linear-gradient(180deg, rgba(35, 36, 40, 0), #232428 88%); }
+.tile__txt { display: flex; flex-direction: column; gap: 8px; padding: 8px 24px 28px; }
+.tile__n { margin: 0 0 4px; font-size: 13px; line-height: 16px; font-weight: 500; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.tile h3 { margin: 0; font-size: 24px; line-height: 32px; letter-spacing: -.02em; }
+.tile p:last-child { margin: 0; font-size: 16px; line-height: 24px; color: var(--text-3); }
+@media (max-width: 1100px) { .steps__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .steps { padding: 80px 0; }
+  .steps__head .d2 { font-size: clamp(36px, 10vw, 48px); }
+  .steps__lead { font-size: 16px; line-height: 24px; }
+  /* on a phone the tiles slide sideways, one and a bit in view */
+  .steps__list { display: flex; gap: 12px; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .steps__list::-webkit-scrollbar { display: none; }
+  .tile { flex: 0 0 78%; scroll-snap-align: start; }
+  .tile__screen { height: 300px; }
+}
+
+/* 6 · the figures: white, as the statement; one large figure, two smaller ones on a line, the source under them */
+.figs { padding: clamp(96px, 11vw, 160px) 0; background: #fff; color: var(--ink); }
+.figs .d2 { max-width: 18ch; font-size: clamp(40px, 4.6vw, 80px); color: var(--ink); }
+.figs__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); margin: clamp(48px, 6vw, 88px) 0 0; }
+.figs__list > div { padding-top: 24px; border-top: 1px solid rgba(35, 37, 43, .14); }
+.figs__list dt { font-size: clamp(40px, 4vw, 64px); line-height: 1; letter-spacing: -.035em; }
+.figs__list dd { margin: 16px 0 0; max-width: 36ch; font-size: 18px; line-height: 28px; color: #5d5f66; }
+.figs__main { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 16px clamp(24px, 4vw, 64px); margin-bottom: clamp(48px, 5vw, 72px); }
+.figs__main dt { font-size: clamp(72px, 11vw, 184px); line-height: .9; letter-spacing: -.05em; }
+.figs__main dd { margin: 0 0 .4em; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.35; color: var(--ink); max-width: 30ch; }
+.figs__src { margin: clamp(40px, 4vw, 56px) 0 0; font-size: 13px; line-height: 18px; color: #8a8d94; }
+@media (max-width: 760px) {
+  .figs { padding: 80px 0; }
+  .figs .d2 { font-size: clamp(36px, 10vw, 48px); }
+  .figs__list { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .figs__main { grid-template-columns: minmax(0, 1fr); margin-bottom: 0; }
+  .figs__main dt { font-size: clamp(64px, 20vw, 96px); }
+  .figs__list dd { font-size: 16px; line-height: 24px; }
+}
+
+/* ================================================================== v36 · footer H: no link menu; two lines and one floor
+   Every part sits on two vertical lines: the gutter (the logo, the title, the contact links) and the field's left edge
+   (the field, the legal line). The title with its line and the field share their bottom; one rule above the floor, the
+   contact links and the legal line on it, on one baseline. Ember on the right, through every row, as before. */
+.foot[data-v="h"] { --fh: clamp(44px, 4vw, 64px); }
+.foot__contact { grid-area: contact; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.foot__contact a, .foot__legal a { color: var(--text-2); text-decoration: none; transition: color .2s; }
+.foot__contact a { font-size: 16px; line-height: 24px; }
+.foot__contact a:hover, .foot__legal a:hover { color: var(--text); }
+.foot__legal a { margin-left: 8px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(194, 197, 203, .4); }
+@media (min-width: 861px) {
+  .foot[data-v="h"] .foot__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-rows: clamp(56px, 5vw, 80px) auto 48px auto clamp(64px, 6vw, 96px) auto 32px;
+    grid-template-areas: ". . ember" "mark . ember" ". . ember" "intro form ember" ". . ember" "contact legal ember" ". . ember"; }
+  .foot[data-v="h"] .foot__main { display: contents; }
+  .foot[data-v="h"] .foot__intro { grid-area: intro; }
+  .foot[data-v="h"] .foot__h { font-size: var(--fh); }
+  .foot[data-v="h"] .foot__lead { margin-top: 20px; max-width: 34ch; }
+  .foot[data-v="h"] .join__form { grid-area: form; align-self: end; position: relative; margin: 0; max-width: none; }
+  .foot[data-v="h"] .join__msg { position: absolute; left: 20px; right: 0; top: 100%; margin: 8px 0 0; }
+  /* the floor: a rule over the first two columns, the contact links and the legal line on it */
+  .foot[data-v="h"] .foot__contact, .foot[data-v="h"] .foot__legal { align-self: start; padding-top: 24px; border-top: 1px solid var(--lijn); }
+  .foot[data-v="h"] .foot__contact { margin-right: calc(-1 * clamp(32px, 4vw, 64px)); padding-right: clamp(32px, 4vw, 64px); }
+  .foot[data-v="h"] .foot__legal { padding-top: 27px; max-width: none; }
+  .foot[data-v="h"] .foot__prod { width: clamp(260px, 26vw, 400px); top: clamp(56px, 5vw, 80px); }   /* its top on the logo's line */
+  .foot[data-v="h"] .foot__ember { min-height: 0; }   /* the rows follow the text; Ember fills them (its height stretched the rows, so the field sank 11 px) */
+}
+@media (max-width: 860px) {
+  .foot[data-v="h"] .foot__grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 40px auto 8px auto auto 48px auto 24px auto 32px;
+    grid-template-areas: "." "mark" "." "ember" "main" "." "contact" "." "legal" "."; }
+  .foot[data-v="h"] .foot__contact { padding-top: 24px; border-top: 1px solid var(--lijn); }
+}
+/* the bike's section is longer: after the story as it was (74 %) the app goes through its states */
+.seq { height: 670vh; height: 670svh; }   /* v38: two states after the story (84 %), not three */
+@media (prefers-reduced-motion: reduce) { .seq { height: auto; } }
+
+/* ================================================================== v38
+   the hero's call to action larger: as high as the bar's button plus a step, the text at the size of the lead */
+.hero__cta { height: 60px; padding: 0 36px; border-radius: 30px; font-size: 18px; }
+@media (max-width: 760px), (max-aspect-ratio: 4/5) { .hero__cta { height: 54px; padding: 0 28px; border-radius: 27px; font-size: 17px; } }
+
+/* ================================================================== v38 · the figures, after vastspace.com (the Haven-1 block)
+   One margin, four corners and a figure in the middle: top left the subject (the second line in the accent), top right the
+   figures as a spec table (labels right-aligned, values left-aligned, small caps), in the middle a circle of 45 dots of
+   which one is red, "1 op de 45" inside it; bottom left the title, bottom right what it means. A screen high. */
+.figs { position: relative; display: grid; min-height: max(100vh, 720px); min-height: max(100svh, 720px); padding: calc(var(--bar) + 32px) var(--gutter) var(--gutter);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "tag spec" "mid mid" "title lead";
+  gap: 24px 48px; background: #fff; color: var(--ink); overflow: hidden; }
+.figs__tag { grid-area: tag; align-self: start; display: flex; flex-direction: column; margin: 0; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.figs__accent { color: #d8453a; }
+.figs__spec { grid-area: spec; justify-self: end; align-self: start; display: grid; grid-template-columns: auto auto; gap: 2px 12px; margin: 0; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.figs__spec div { display: contents; }
+.figs__spec dt { text-align: right; color: #8a8d94; }
+.figs__spec dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.figs__mid { grid-area: mid; position: relative; justify-self: center; align-self: center; width: min(60vh, 540px, 100%); width: min(60svh, 540px, 100%); aspect-ratio: 1; }
+.figs__ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.figs__dot { fill: #c9cbd0; opacity: 0; transition: opacity .5s var(--ease); }
+.figs__dot--one { fill: #d8453a; }
+.figs__halo { fill: rgba(216, 69, 58, .16); opacity: 0; transform-box: fill-box; transform-origin: center; transition: opacity .6s var(--ease) 1.8s; }
+.figs__ring.is-in .figs__dot, .figs__ring.is-in .figs__halo { opacity: 1; }
+.figs__ring.is-in .figs__halo { animation: figsPulse 2.6s var(--ease) 2.2s infinite; }
+@keyframes figsPulse { 0% { transform: scale(.6); opacity: .9; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+.figs__big { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0; text-align: center; }
+.figs__big b { font-weight: 400; font-size: clamp(48px, 5.4vw, 88px); line-height: .95; letter-spacing: -.045em; white-space: nowrap; }
+.figs__big span { margin-top: 16px; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: #8a8d94; }
+.figs__title { grid-area: title; align-self: end; margin: 0; font-size: clamp(32px, 3.2vw, 52px); line-height: 1.02; letter-spacing: -.035em; font-weight: 400; color: var(--ink); }
+.figs__lead { grid-area: lead; justify-self: end; align-self: end; max-width: 38ch; margin: 0; font-size: 16px; line-height: 24px; color: #5d5f66; }
+@media (max-width: 760px) {
+  .figs { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "tag" "mid" "title" "lead" "spec"; min-height: 0; padding: 80px var(--gutter); gap: 24px; }
+  .figs__mid { width: min(100%, 340px); margin: 8px 0; }
+  .figs__big b { font-size: clamp(40px, 12vw, 56px); }
+  .figs__spec, .figs__lead { justify-self: start; }
+  .figs__spec { margin-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .figs__ring.is-in .figs__halo { animation: none; } }
+/* the figures fit one screen: the circle takes the height that is left between the top and bottom lines; the bottom line
+   clears the counter in the corner */
+@media (min-width: 761px) {
+  .figs { height: max(100vh, 640px); height: max(100svh, 640px); min-height: 0; padding-bottom: 72px; }
+  .figs__mid { align-self: stretch; height: 100%; max-height: 540px; width: auto; min-height: 0; }
+}
+@media (max-width: 760px) {
+  .figs__spec { justify-self: stretch; grid-template-columns: minmax(0, 1fr) auto; gap: 0; }
+  .figs__spec dt, .figs__spec dd { padding: 10px 0; border-top: 1px solid rgba(35, 37, 43, .1); }
+  .figs__spec dt { text-align: left; }
+  .figs__spec dd { text-align: right; padding-left: 16px; }
+}
+/* the figure scales with its circle (a container), so it never touches the dots */
+.figs__mid { container-type: size; }
+.figs__big b { font-size: clamp(32px, 16.5cqw, 88px); }
+.figs__big span { margin-top: clamp(8px, 2.6cqw, 16px); }
+@media (max-width: 760px) {
+  .figs__mid { height: auto; }
+  .figs__spec { grid-template-columns: minmax(0, 1fr) minmax(0, 42%); }
+}
+
+/* ================================================================== v40
+   the footer's floor without its rule: the contact links and the legal line keep their place and their baseline */
+.foot[data-v="h"] .foot__contact, .foot[data-v="h"] .foot__legal { border-top: 0; }
+
+/* ================================================================== v40 · the figures, rebuilt on checked sources
+   White, as the statement. A head (label, title, lead), then two figures side by side: the 1 in 45 as a grid of 45 dots
+   (an icon array, the format risk research recommends for "1 in N") and the trend as bars; under them four figures in a
+   row on a rule. Every figure carries its source in small caps. */
+.facts { padding: clamp(96px, 11vw, 160px) 0; background: #fff; color: var(--ink); }
+.facts__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "tag tag" "title lead"; align-items: end; gap: 20px clamp(32px, 5vw, 96px); margin-bottom: clamp(56px, 6vw, 96px); }
+.facts__tag, .facts__label, .facts__src { margin: 0; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.facts__tag { grid-area: tag; color: #d8453a; }
+.facts__title { grid-area: title; margin: 0; font-size: clamp(40px, 4.6vw, 80px); line-height: 1; letter-spacing: -.04em; font-weight: 400; }
+.facts__lead { grid-area: lead; max-width: 40ch; margin: 0 0 .3em; font-size: 18px; line-height: 28px; color: #5d5f66; }
+.facts__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); }
+.facts__fig { display: flex; flex-direction: column; margin: 0; padding-top: 24px; border-top: 1px solid rgba(35, 37, 43, .14); }
+.facts__label { color: #8a8d94; }
+.facts__src { margin-top: 16px; color: #a0a3aa; font-size: 11px; line-height: 15px; }
+.facts__fig figcaption { max-width: 34ch; margin-top: 12px; font-size: 18px; line-height: 26px; color: var(--ink); }
+/* the grid of 45: 9 by 5, one red */
+.facts__array { display: grid; grid-template-columns: repeat(9, 1fr); gap: clamp(8px, 1.1vw, 14px); width: min(100%, 340px); margin: 32px 0 28px; }
+.facts__array i { aspect-ratio: 1; border-radius: 50%; background: #d4d6db; opacity: 0; transform: scale(.4); transition: opacity .4s var(--ease), transform .5s var(--ease); }
+.facts__array i.is-one { background: #d8453a; box-shadow: 0 0 0 6px rgba(216, 69, 58, .14); }
+.facts__one.is-in .facts__array i { opacity: 1; transform: none; }
+.facts__big { display: flex; flex-direction: column; margin: 0; font-size: clamp(56px, 6vw, 104px); line-height: .95; letter-spacing: -.045em; }
+.facts__big small { margin-bottom: 8px; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: #8a8d94; }
+/* the bars: the share each year, its value over it; 2019 and 2024 (the doubling) in ink and red */
+.facts__bars { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: end; gap: clamp(8px, 1.2vw, 16px); height: clamp(260px, 26vw, 360px); margin: 32px 0 0; padding: 0; list-style: none; }
+.facts__bar { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-end; height: 100%; text-align: center; }
+.facts__bar b { margin-bottom: 8px; font-size: 14px; line-height: 18px; font-weight: 500; font-variant-numeric: tabular-nums; color: #5d5f66; }
+.facts__bar i { height: calc(var(--v, 0) / 6.5 * (100% - 60px)); border-radius: 8px 8px 2px 2px; background: #d4d6db; transform: scaleY(0); transform-origin: bottom; transition: transform .8s var(--ease); }
+.facts__bar span { margin-top: 10px; font-size: 13px; line-height: 16px; color: #8a8d94; font-variant-numeric: tabular-nums; }
+.facts__bar.is-key i { background: var(--ink); }
+.facts__bar.is-key:nth-child(6) i { background: #d8453a; }
+.facts__bar.is-key b { color: var(--ink); }
+.facts__trend.is-in .facts__bar i { transform: none; }
+.facts__trend figcaption { margin-top: 20px; }
+/* four figures on a rule */
+.facts__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 clamp(24px, 3vw, 48px); margin: clamp(64px, 7vw, 112px) 0 0; padding: 0; list-style: none; }
+.facts__stats li { display: flex; flex-direction: column; padding-top: 24px; border-top: 1px solid rgba(35, 37, 43, .14); }
+.facts__stats p { margin: 0; }
+.facts__stats .facts__num { margin-bottom: 12px; font-size: clamp(40px, 3.6vw, 60px); line-height: 1; letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+.facts__stats p:not([class]) { font-size: 16px; line-height: 24px; color: #5d5f66; }
+.facts__stats .facts__src { margin-top: auto; padding-top: 16px; }
+@media (max-width: 1000px) { .facts__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; } }
+@media (max-width: 760px) {
+  .facts { padding: 80px 0; }
+  .facts__head, .facts__grid { grid-template-columns: minmax(0, 1fr); }
+  .facts__head { grid-template-areas: "tag" "title" "lead"; margin-bottom: 48px; }
+  .facts__title { font-size: clamp(36px, 10vw, 48px); }
+  .facts__lead { font-size: 16px; line-height: 24px; }
+  .facts__grid { gap: 56px; }
+  .facts__bars { height: 240px; }
+  .facts__fig figcaption { font-size: 16px; line-height: 24px; }
+  .facts__stats { gap: 32px 20px; margin-top: 56px; }
+}
+@media (prefers-reduced-motion: reduce) { .facts__array i, .facts__bar i { opacity: 1; transform: none; transition: none; } }
+
+/* the two figures on the same rows (label, picture, caption, source), so their captions and sources sit level;
+   the bars slimmer, centred in their column */
+@media (min-width: 761px) {
+  .facts__grid { grid-template-rows: auto 1fr auto auto; row-gap: 0; }
+  .facts__fig { display: grid; grid-row: span 4; grid-template-rows: subgrid; align-items: end; }
+  .facts__fig > .facts__label { align-self: start; }
+}
+.facts__vis { display: flex; flex-direction: column; }
+.facts__bar i { width: min(100%, 44px); align-self: center; border-radius: 6px 6px 2px 2px; }
+.facts__bars { gap: clamp(12px, 2vw, 28px); }
+@media (min-width: 761px) { .facts__fig > figcaption, .facts__fig > .facts__src { align-self: start; } }
+
+/* ================================================================== v41 · the four steps and the figures in the site's own language
+   Steps, as "Ember in detail" on the dark: the title, a line and four pills on the left (the detail pills, a number in the
+   circle), on the right the app's screen of the open step on a stage, in the phone panel of the bike's story. */
+.start { padding: clamp(80px, 9vw, 140px) 0; background: var(--bg-1); }
+.start__grid { display: grid; grid-template-columns: minmax(300px, 5fr) 7fr; gap: clamp(24px, 3vw, 48px); align-items: center; margin: 0 var(--gutter); }
+.start__menu { display: flex; flex-direction: column; align-items: flex-start; }
+.start__title { margin: 0; font-size: clamp(44px, 4.4vw, 76px); line-height: 1.02; letter-spacing: -.04em; font-weight: 400; }
+.start__lead { max-width: 34ch; margin: 20px 0 40px; font-size: 18px; line-height: 28px; color: var(--text-3); }
+.start__list { margin: 0; padding: 0; list-style: none; width: 100%; }
+.start__n { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(245, 245, 247, .9); font-size: 14px; line-height: 1; font-weight: 500; font-variant-numeric: tabular-nums; transition: background-color .3s var(--ease), color .3s var(--ease); }
+.start .xf__item.is-open .start__n { background: var(--text); color: var(--on-light); }
+.start__stage { position: relative; display: grid; place-items: center; height: min(78vh, 760px); min-height: 460px; border-radius: 32px; background: radial-gradient(70% 60% at 50% 45%, #2a2c30, #1f2023 70%); overflow: hidden; }
+.start__phone { position: relative; height: min(84%, 640px); aspect-ratio: 430 / 932; border-radius: 40px; overflow: hidden; background: #1c1d20; box-shadow: inset 0 0 0 1px var(--vlak-actief), 0 40px 100px -30px rgba(0, 0, 0, .85); }
+.start__phone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity .6s var(--ease); }
+.start__phone img.is-on { opacity: 1; }
+@media (max-width: 860px) {
+  .start { padding: 72px 0; }
+  .start__grid { grid-template-columns: minmax(0, 1fr); }
+  .start__title { font-size: clamp(40px, 11vw, 52px); }
+  .start__lead { margin: 16px 0 24px; font-size: 16px; line-height: 24px; }
+  .start__stage { order: 2; height: min(70vh, 560px); min-height: 0; border-radius: 24px; }
+  .start__menu { display: contents; }
+  .start__title { order: 0; } .start__lead { order: 1; } .start__list { order: 3; margin-top: 8px; }
+}
+
+/* Figures, in the light of "Ember in detail": the same light grey, the cards white with its 32 px radius, the bars rounded as
+   in the app's chart, four figures as the app's tiles. Labels and sources as the app writes them, in sentence case. */
+.cijf { padding: clamp(80px, 9vw, 140px) 0; background: #f5f5f7; color: #1d1d1f; }
+.cijf__wrap { margin: 0 var(--gutter); }
+.cijf__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 20px clamp(32px, 5vw, 96px); margin-bottom: clamp(40px, 5vw, 64px); }
+.cijf__title { margin: 0; font-size: clamp(44px, 4.4vw, 76px); line-height: 1.02; letter-spacing: -.04em; font-weight: 400; }
+.cijf__lead { max-width: 42ch; margin: 0 0 .3em; font-size: 18px; line-height: 28px; color: #424245; }
+.cijf__cards { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.cijf__card { display: flex; flex-direction: column; margin: 0; padding: clamp(28px, 3.4vw, 48px); border-radius: 32px; background: #fff; }
+.cijf__label { font-size: 16px; line-height: 24px; font-weight: 500; color: #1d1d1f; }
+.cijf__text { max-width: 36ch; margin: 12px 0 0; font-size: 16px; line-height: 24px; color: #424245; }
+.cijf__src { margin: auto 0 0; padding-top: 24px; font-size: 13px; line-height: 18px; color: #86868b; }
+/* 1 in 45: a grid of 45 dots, one red */
+.cijf__array { display: grid; grid-template-columns: repeat(9, 1fr); gap: clamp(8px, 1vw, 12px); width: min(100%, 300px); margin: 32px 0; }
+.cijf__array i { aspect-ratio: 1; border-radius: 50%; background: #d2d2d7; opacity: 0; transform: scale(.4); transition: opacity .4s var(--ease), transform .5s var(--ease); }
+.cijf__array i.is-one { background: #d8453a; box-shadow: 0 0 0 5px rgba(216, 69, 58, .14); }
+.cijf__one.is-in .cijf__array i { opacity: 1; transform: none; }
+.cijf__big { display: flex; flex-direction: column; margin: auto 0 0; font-size: clamp(48px, 4.8vw, 84px); line-height: .98; letter-spacing: -.045em; }
+.cijf__big span { margin-bottom: 6px; font-size: 16px; line-height: 24px; letter-spacing: 0; color: #86868b; }
+/* the trend: rounded bars as in the app's chart, 2024 in red, 2019 in ink */
+.cijf__bars { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: end; gap: 8px; height: clamp(240px, 22vw, 320px); margin: 32px 0 0; padding: 0; list-style: none; }
+.cijf__bar { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.cijf__bar b { margin-bottom: 8px; font-size: 13px; line-height: 16px; font-weight: 500; font-variant-numeric: tabular-nums; color: #86868b; }
+.cijf__bar i { width: min(100%, 22px); height: calc(var(--v, 0) / 6.5 * (100% - 56px)); border-radius: 11px; background: #d2d2d7; transform: scaleY(0); transform-origin: bottom; transition: transform .8s var(--ease); }
+.cijf__bar span { margin-top: 10px; font-size: 13px; line-height: 16px; color: #86868b; font-variant-numeric: tabular-nums; }
+.cijf__bar.is-first i { background: #1d1d1f; } .cijf__bar.is-key i { background: #d8453a; }
+.cijf__bar.is-first b, .cijf__bar.is-key b { color: #1d1d1f; }
+.cijf__trend.is-in .cijf__bar i { transform: none; }
+/* four tiles, as the app's: the figure, a line, the source at the foot */
+.cijf__tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 16px 0 0; padding: 0; list-style: none; }
+.cijf__tile { display: flex; flex-direction: column; gap: 8px; min-height: 220px; padding: 28px; border-radius: 24px; background: #fff; }
+.cijf__tile b { font-size: clamp(36px, 3.2vw, 52px); line-height: 1; letter-spacing: -.035em; font-weight: 400; font-variant-numeric: tabular-nums; }
+.cijf__tile span { margin-top: 8px; font-size: 16px; line-height: 24px; color: #424245; }
+.cijf__tile small { margin-top: auto; padding-top: 16px; font-size: 13px; line-height: 18px; color: #86868b; }
+@media (max-width: 1000px) { .cijf__tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .cijf { padding: 72px 0; }
+  .cijf__head, .cijf__cards { grid-template-columns: minmax(0, 1fr); }
+  .cijf__title { font-size: clamp(40px, 11vw, 52px); }
+  .cijf__lead { font-size: 16px; line-height: 24px; }
+  .cijf__card { padding: 24px; border-radius: 24px; }
+  .cijf__bars { height: 220px; }
+  .cijf__tiles { gap: 8px; } .cijf__cards { gap: 8px; } .cijf__tiles { margin-top: 8px; }
+  .cijf__tile { min-height: 0; padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .cijf__array i, .cijf__bar i { opacity: 1; transform: none; transition: none; } }
+.cijf__trend .cijf__bars { margin-top: auto; padding-top: 32px; }   /* both cards set from their foot: the captions sit level */
+@media (max-width: 560px) {
+  .cijf__tiles { grid-template-columns: minmax(0, 1fr); }
+  .cijf__tile { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 16px; align-items: start; }
+  .cijf__tile b { grid-row: 1 / 3; font-size: 32px; }
+  .cijf__tile span { margin-top: 0; font-size: 15px; line-height: 22px; }
+  .cijf__tile small { grid-column: 2; padding-top: 4px; }
+}
+
+/* ================================================================== v42
+   The four steps without the screens: the title on the left, the steps on the right as rows in the shape of an open detail
+   pill (the number in a white circle, the step, one line). The figures back to the 2,2%: three of the app's tiles, the
+   first twice as wide with the large figure, the source under them. */
+.start__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+.start__lead { margin-bottom: 0; }
+.start__steps { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.start__step { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 0 16px; padding: 20px 28px 22px 18px; border-radius: 24px; background: var(--vlak-actief); }
+.start__step .start__n { background: var(--text); color: var(--on-light); box-shadow: none; }
+.start__step h3 { margin: 3px 0 0; font-size: 18px; line-height: 24px; font-weight: 500; letter-spacing: -.01em; }
+.start__step p { max-width: 52ch; margin: 8px 0 0; font-size: 16px; line-height: 25px; color: var(--text-2); }
+@media (max-width: 860px) {
+  .start__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .start__menu { display: flex; }
+  .start__step { padding: 18px 20px 20px 16px; }
+}
+
+.cijf__head { display: block; }
+.cijf__three { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.cijf__fig { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: clamp(240px, 22vw, 320px); padding: clamp(28px, 3vw, 44px); border-radius: 24px; background: #fff; }
+.cijf__fig b { font-size: clamp(44px, 4.4vw, 72px); line-height: 1; letter-spacing: -.04em; font-weight: 400; font-variant-numeric: tabular-nums; }
+.cijf__fig span { max-width: 30ch; font-size: 16px; line-height: 24px; color: #424245; }
+.cijf__fig--main { border-radius: 32px; }
+.cijf__fig--main b { font-size: clamp(72px, 9vw, 160px); line-height: .9; letter-spacing: -.05em; }
+.cijf__fig--main b::after { content: ""; display: inline-block; width: .16em; height: .16em; margin-left: .08em; border-radius: 50%; background: #d8453a; vertical-align: .62em; }
+.cijf__fig--main span { max-width: 34ch; font-size: 20px; line-height: 30px; color: #1d1d1f; }
+.cijf__source { margin: 24px 0 0; font-size: 13px; line-height: 18px; color: #86868b; }
+@media (max-width: 900px) {
+  .cijf__three { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .cijf__fig--main { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .cijf__three { gap: 8px; }
+  .cijf__fig { min-height: 0; padding: 24px; }
+  .cijf__fig--main span { font-size: 17px; line-height: 26px; }
+}
+.start__step p { max-width: none; text-wrap: pretty; }   /* no word left alone on the last line */
+@media (max-width: 560px) { .cijf__three { grid-template-columns: minmax(0, 1fr); } .cijf__fig { gap: 12px; } .cijf__fig b { white-space: nowrap; } }
+
+/* ================================================================== v43
+   The four steps as the app's cards (Figma V11 · Kaarten, 1069:45498): radius 24, the card's light veil on the dark, the
+   title and a line, room, the icon at the foot; the count in the corner as in the onboarding. Four in a row; two by two on a
+   phone, as in the app. */
+.start__wrap { margin: 0 var(--gutter); }
+.start__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 20px clamp(32px, 5vw, 96px); margin-bottom: clamp(40px, 5vw, 64px); }
+.start__head .start__lead { margin: 0 0 .3em; }
+.start__cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.start__card { position: relative; display: flex; flex-direction: column; gap: 4px; min-height: clamp(200px, 15vw, 224px); padding: 24px; border-radius: 24px; background: var(--vlak); }
+.start__card h3 { margin: 0; padding-right: 40px; font-size: 18px; line-height: 24px; font-weight: 500; }
+.start__text { margin: 0; font-size: 16px; line-height: 24px; color: var(--text-3); text-wrap: pretty; }
+.start__count { position: absolute; top: 24px; right: 24px; margin: 0; font-size: 12px; line-height: 24px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.start__card img { margin-top: auto; padding-top: 24px; box-sizing: content-box; }
+@media (max-width: 1000px) { .start__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .start__head { grid-template-columns: minmax(0, 1fr); margin-bottom: 32px; }
+  .start__card { min-height: 0; padding: 20px; }
+  .start__card h3 { font-size: 16px; padding-right: 28px; }
+  .start__count { top: 20px; right: 16px; }
+  .start__text { font-size: 15px; line-height: 22px; }
+}
+
+/* The figures, as Apple sets them out: white, centred, a short head; three columns, each a line above the figure, the figure
+   large and semibold, a line under it, a footnote mark; the source as a footnote at the foot. */
+.cijf { padding: clamp(96px, 11vw, 160px) 0; background: #fff; color: #1d1d1f; text-align: center; }
+.cijf__wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+.cijf__eyebrow { margin: 0 0 12px; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.2; font-weight: 600; color: #d8453a; }
+.cijf .cijf__title { margin: 0; font-size: clamp(40px, 5.2vw, 80px); line-height: 1.05; letter-spacing: -.035em; font-weight: 600; }
+.cijf__intro { max-width: 38ch; margin: 20px auto 0; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.45; font-weight: 500; color: #6e6e73; text-wrap: balance; }
+.cijf__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: clamp(64px, 7vw, 104px) 0 0; padding: 0; list-style: none; }
+.cijf__stats li { display: flex; flex-direction: column; align-items: center; padding: 8px clamp(16px, 2.6vw, 40px); }
+.cijf__stats li + li { border-left: 1px solid #d2d2d7; }
+.cijf__over { font-size: 17px; line-height: 21px; font-weight: 600; }
+.cijf__num { display: block; margin: 6px 0 0; font-size: clamp(56px, 6.4vw, 104px); line-height: 1.08; letter-spacing: -.045em; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cijf__num--hot { color: #1d1d1f; }   /* v43: no gradient (it did not fit the site's style); ink as the other figures */
+.cijf__under { max-width: 22ch; margin-top: 10px; font-size: 17px; line-height: 25px; font-weight: 500; color: #6e6e73; text-wrap: balance; }
+.cijf sup { margin-left: 1px; font-size: .6em; line-height: 0; vertical-align: super; color: #6e6e73; }
+.cijf__foot { max-width: 64ch; margin: clamp(56px, 6vw, 88px) auto 0; font-size: 12px; line-height: 16px; color: #86868b; }
+@media (max-width: 760px) {
+  .cijf { padding: 80px 0; }
+  .cijf .cijf__title { font-size: clamp(36px, 10vw, 44px); }
+  .cijf__stats { grid-template-columns: minmax(0, 1fr); margin-top: 48px; }
+  .cijf__stats li { padding: 32px 0; }
+  .cijf__stats li + li { border-left: 0; border-top: 1px solid #d2d2d7; }
+  .cijf__num { font-size: clamp(56px, 18vw, 80px); }
+}
+/* the steps' head as the figures' head: the title centred, its line centred under it */
+.start__head { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 20px; text-align: center; }
+.start__head .start__title .ln { display: block; }
+.start__head .start__lead { max-width: 38ch; margin: 0; text-wrap: balance; }
+
+/* ================================================================== v44
+   "In cijfers" in the grey of the line under the title, not in red */
+.cijf__eyebrow { color: #6e6e73; }
+
+/* ================================================================== v45 · Ember in detail
+   Measuring: the team's photo of Ember on the battery housing fills the stage (its dark is the studio's), the infrared window
+   marked in the app's green, two notes on lines, the housing named, one line on what Ember measures. The turning model hides. */
+.look__photo { position: absolute; inset: 0; margin: 0; overflow: hidden; border-radius: inherit; background: #050506; opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility 0s .6s; pointer-events: none; }
+.look__stage[data-f="measure"] .look__photo { opacity: 1; visibility: visible; transition-delay: .15s, 0s; }
+.look__stage[data-f="measure"] .look__cam, .look__stage[data-f="measure"] .look__slider, .look__stage[data-f="measure"] .look__ir { opacity: 0; pointer-events: none; }
+.look__photo img { position: absolute; max-width: none; height: auto; }
+.look__mark { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #a9ddb5; box-shadow: 0 0 0 4px rgba(169, 221, 181, .25), 0 0 16px rgba(169, 221, 181, .7); }
+.look__leads { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.look__leads path { fill: none; stroke: rgba(245, 245, 247, .5); stroke-width: 1; }
+.look__leads .l1 { stroke: rgba(169, 221, 181, .85); }
+.look__pn { position: absolute; margin: 0; color: #f5f5f7; text-align: right; }
+.look__pn b { display: block; font-size: 15px; line-height: 20px; font-weight: 500; }
+.look__pn span { display: block; margin-top: 4px; font-size: 13px; line-height: 18px; color: rgba(245, 245, 247, .7); }
+.look__pn--house, .look__pn--out { text-align: left; }
+.look__pn--house b { color: rgba(245, 245, 247, .8); }
+.look__pn--out span { color: rgba(245, 245, 247, .55); }
+.look__stage[data-f="measure"] .look__pn { opacity: 0; animation: lookIn .5s var(--ease) .45s forwards; }
+@keyframes lookIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 860px) {
+  .look__pn span { display: none; }
+  .look__pn--out span { display: block; }
+}
+
+/* Readable in the app: Ember steps aside and the phone stands beside it at the same scale (an iPhone 17 Pro Max, 78 x 163,4 mm,
+   its screen 72,9 x 158,4 mm), the app's home on it; under it, small, that the screen is a concept */
+.look__phoneview { position: absolute; --mm: 3px; opacity: 0; visibility: hidden; transform: translateX(24px); transition: opacity .5s var(--ease), transform .7s var(--ease), visibility 0s .5s; pointer-events: none; }
+.look__stage[data-f="app"] .look__phoneview { opacity: 1; visibility: visible; transform: none; transition-delay: .25s, .25s, 0s; }
+.look__stage[data-f="app"] .look__slider { opacity: 0; pointer-events: none; }
+.look__phone { width: calc(var(--mm) * 78); height: calc(var(--mm) * 163.4); padding: calc(var(--mm) * 2.55); border-radius: calc(var(--mm) * 12.6); background: linear-gradient(145deg, #4a4c51, #1c1d20 40%, #2c2e32 70%, #45474c); box-shadow: 0 40px 70px -34px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255, 255, 255, .14); }
+.look__screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: calc(var(--mm) * 10.2); background: #1c1d20; }
+.look__status { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; height: calc(var(--mm) * 9); margin: 0; padding: 0 calc(var(--mm) * 6.5); font-size: calc(var(--mm) * 3.1); font-weight: 600; color: #f5f5f7; }
+.look__status i { width: calc(var(--mm) * 21); height: calc(var(--mm) * 6.4); border-radius: calc(var(--mm) * 3.2); background: #000; }
+.look__icons { display: flex; align-items: center; gap: calc(var(--mm) * 1.2); }
+.look__icons img { height: calc(var(--mm) * 2.6); width: auto; }
+.look__home { position: absolute; left: 0; top: calc(var(--mm) * 4); width: 100%; height: auto; }
+.look__cap { margin: calc(var(--mm) * 3) 0 0; font-size: 12px; line-height: 16px; color: #86868b; text-align: center; }
+
+.look__photo img { -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); }
+.look__home { top: calc(var(--mm) * 7); }
+
+/* ================================================================== v45 · the rest
+   overheated: the 71 in white, as the other temperatures (the state word and the bars carry the red) */
+.ios__laag--heet .ios__temp { color: var(--text); }
+/* the figures in the site's own type: the regular weight of its titles and figures, the title at the size of the others */
+.cijf .cijf__title { font-size: clamp(44px, 4.4vw, 76px); line-height: 1.02; letter-spacing: -.04em; font-weight: 400; }
+.cijf__eyebrow, .cijf__over { font-weight: 500; }
+.cijf__intro, .cijf__under { font-weight: 400; }
+.cijf__num { font-weight: 400; letter-spacing: -.05em; }
+/* the partners smaller: less room around, the title at the size of the other titles, the logos a step smaller */
+.partners { padding: clamp(64px, 7vw, 104px) 0; }
+.partners__title { font-size: clamp(44px, 4.4vw, 76px); line-height: 1.02; letter-spacing: -.04em; }
+.partners__logos { margin-top: clamp(40px, 5vw, 64px); gap: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 48px); }
+.partners__logos li { min-height: 56px; }
+.partners__logos img { height: 44px; } .partners__logos li:nth-child(2) img { height: 56px; } .partners__logos li:nth-child(3) img { height: 34px; }
+.partners__text b { font-size: 19px; line-height: 24px; }
+@media (max-width: 860px) { .partners { padding: 64px 0; } .partners__logos { margin-top: 32px; } .partners__logos img { height: 32px !important; } }
+
+@media (max-width: 860px) { .look__pn b { font-size: 13px; line-height: 17px; } .look__pn--out span { font-size: 12px; line-height: 16px; } }
+
+/* ================================================================== v46
+   the alarm: a red bell on the app icon instead of a red border round the notification */
+.push.is-danger { box-shadow: none; }
+.push__icon { position: relative; flex: none; width: 40px; height: 40px; }
+.push__bell { position: absolute; right: -7px; bottom: -7px; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e24d42; box-shadow: 0 0 0 2px rgba(62, 64, 70, 1); opacity: 0; transform: scale(.6); transition: opacity .3s var(--ease), transform .4s var(--ease); }
+.push__bell img { width: 14px !important; height: 14px !important; border-radius: 0 !important; }
+.push.is-danger .push__bell { opacity: 1; transform: none; }
+/* Ember in detail: the phone's border thinner (the iPhone's own bezel, about 1,6 mm) */
+.look__phone { padding: calc(var(--mm) * 1.6); border-radius: calc(var(--mm) * 12.2); }
+.look__screen { border-radius: calc(var(--mm) * 10.6); }
+/* the figures' line under the title in two lines, centred */
+.cijf__intro { max-width: 64ch; text-wrap: balance; text-align: center; }
+/* the partners: a little less room again */
+.partners { padding: clamp(48px, 5.5vw, 80px) 0; }
+@media (max-width: 860px) { .partners { padding: 48px 0; } }
+/* without the slider the product stands in the middle of the stage (the room under it was the slider's) */
+.look__cam { inset: 38px 0; }
+/* Measuring, in the white of the stage: our render on the white, the notes in ink with grey lines, the sensors marked green,
+   the air slot grey */
+.look__photo { background: transparent; }
+.look__photo img { -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); }
+.look__mark { background: #3f8a53; box-shadow: 0 0 0 4px rgba(63, 138, 83, .18), 0 0 14px rgba(63, 138, 83, .45); }
+.look__mark--air { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; background: #86868b; box-shadow: 0 0 0 4px rgba(134, 134, 139, .16); }
+.look__leads path { stroke: rgba(29, 29, 31, .3); }
+.look__leads .l1 { stroke: rgba(63, 138, 83, .8); }
+.look__pn { color: #1d1d1f; }
+.look__pn span { color: #6e6e73; }
+.look__pn--house b { color: #6e6e73; font-weight: 400; }
+.look__pn--out span { color: #86868b; }
+/* The magnetic mount: the housing and the frames over it, as wide as the stage is high; the ends fade as in measuring */
+.look__magnet { position: absolute; inset: 0; margin: 0; overflow: hidden; border-radius: inherit; opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility 0s .6s; pointer-events: none; }
+.look__stage[data-f="magnet"] .look__magnet { opacity: 1; visibility: visible; transition-delay: .15s, 0s; }
+.look__stage[data-f="magnet"] .look__cam, .look__stage[data-f="magnet"] .look__plate { opacity: 0; pointer-events: none; }
+.look__magnet img, .look__magnet canvas { position: absolute; max-width: none; -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); }
+.look__magnet .look__pn { opacity: 0; transform: translateY(4px); transition: opacity .45s var(--ease), transform .45s var(--ease); }
+.look__magnet .look__pn.is-on { opacity: 1; transform: none; }
+.look__magnet .look__pn--sticker { text-align: left; }
+.look__magnet .look__leads path { opacity: 0; transition: opacity .45s var(--ease); }
+.look__magnet .look__leads path.is-on { opacity: 1; }
+.look__magnet .look__leads .l1 { stroke: rgba(29, 29, 31, .3); }
+@media (max-width: 860px) { .look__magnet .look__pn span { display: none; } }
+/* the notes' lines as the app's: a row of dots, three larger ones running along it from the product to the note */
+.look__leads path { fill: none; stroke: #86868b; stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: 0 8; opacity: .75; }
+.look__leads .run { stroke-width: 5.2; stroke-dasharray: 0 var(--g, 40px); opacity: 1; animation: leadRun 2.6s linear infinite; }
+.look__leads .l1 path { stroke: #3f8a53; }
+.look__magnet .look__leads .l1 path { stroke: #86868b; }
+.look__leads g { transition: opacity .45s var(--ease); }
+.look__magnet .look__leads g { opacity: 0; }
+.look__magnet .look__leads g.is-on { opacity: 1; }
+.look__magnet .look__leads path { opacity: .75; } .look__magnet .look__leads .run { opacity: 1; }
+@keyframes leadRun { from { stroke-dashoffset: 0; } to { stroke-dashoffset: calc(-1 * var(--g, 40px)); } }
+@media (prefers-reduced-motion: reduce) { .look__leads .run { display: none; } }
+/* on a phone the copy runs close under the bar: once the page moves, the bar is glass (dark, or light over a light
+   section), so the logo and the button never sit on top of a line of text */
+@media (max-width: 860px) {
+  .bar::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(12, 12, 14, .72); -webkit-backdrop-filter: saturate(180%) blur(18px); backdrop-filter: saturate(180%) blur(18px); box-shadow: 0 1px 0 rgba(255, 255, 255, .06); opacity: 0; transition: opacity .3s var(--ease), background-color .3s; pointer-events: none; }
+  .bar.is-scrolled::before { opacity: 1; }
+  .bar.is-light::before { background: rgba(255, 255, 255, .78); box-shadow: 0 1px 0 rgba(0, 0, 0, .06); }
+}
+@media (max-width: 860px) { :root { --bar: 64px; } }
+@media (max-width: 860px) { .look__photo .look__pn b { font-size: 12px; line-height: 16px; } }
+/* the lines are drawn on a canvas over the whole stage (the app's dotted line) */
+.look__lines, .look__magnet canvas.look__lines { position: absolute; left: 0; top: 0; width: 100%; height: 100%; -webkit-mask-image: none; mask-image: none; pointer-events: none; }
+
+/* ================================================================== v47
+   the figures on dark grey, the grey of the questions (the partners' lighter grey between them), the copy light */
+.cijf { background: #1c1d20; color: #f5f5f7; }
+.cijf .cijf__title, .cijf__over, .cijf__num, .cijf__num--hot { color: #f5f5f7; }
+.cijf__eyebrow { color: #86868b; }
+.cijf__intro, .cijf__under { color: #a1a1a6; }
+.cijf__stats li + li { border-left-color: rgba(255, 255, 255, .14); }
+@media (max-width: 760px) { .cijf__stats li + li { border-top-color: rgba(255, 255, 255, .14); } }
+/* measuring: narrow notes, the description in the grey of the stage's copy */
+.look__photo .look__pn b { margin-bottom: 2px; }
+
+/* ================================================================== v48
+   the slider back under Ember in detail, without its words, only while nothing is chosen; the camera's frame leaves it room */
+.look__cam { inset: 0 0 76px; }
+.look__slider { bottom: 20px; gap: 0; }
+.look__slider input { margin: 0; }
+/* the figures and the questions in the black of the opening; the partners white between them, their logos in black */
+.cijf, .faq { background: var(--studio); }
+.partners { background: #fff; color: #1d1d1f; }
+.partners__title { color: #1d1d1f; }
+.partners__logos img { filter: grayscale(1) brightness(0); }
+.partners__text span { color: #6e6e73; } .partners__text b { color: #1d1d1f; }
+.partners__logos img, .partners__text { opacity: 1; }
+.partners__logos li:first-child img { filter: none; }   /* the EC's own black version: a black flag with white stars */
+/* the partners as a band between the questions and the foot (white, the logos black), their logos running past slowly;
+   one set is a quarter of the track, so the loop moves a quarter; it stands still when you point at it */
+.band { position: relative; background: #fff; padding: clamp(28px, 3.2vw, 44px) 0; overflow: hidden; }
+.band__view { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.band__track { display: flex; align-items: center; width: max-content; margin: 0; padding: 0; list-style: none; animation: bandRun 30s linear infinite; }
+.band__track li { flex: none; display: flex; align-items: center; padding-right: clamp(64px, 8vw, 120px); }
+.band__track img { display: block; width: auto; height: 34px; filter: grayscale(1) brightness(0); }
+.band__track img[src*="ec-black"] { height: 40px; filter: none; }
+.band__track img[src*="rabobank"] { height: 46px; }
+.band__track img[src*="metip"] { height: 26px; }
+.band__text { flex-direction: column; align-items: flex-start !important; }
+.band__text span { font-size: 12px; line-height: 16px; color: #6e6e73; white-space: nowrap; }
+.band__text b { font-size: 18px; line-height: 22px; font-weight: 500; letter-spacing: -.02em; color: #1d1d1f; white-space: nowrap; }
+@keyframes bandRun { to { transform: translateX(-25%); } }
+@media (hover: hover) { .band:hover .band__track { animation-play-state: paused; } }
+@media (max-width: 760px) {
+  .band { padding: 24px 0; }
+  .band__track { animation-duration: 24s; }
+  .band__track li { padding-right: 48px; }
+  .band__track img { height: 26px; } .band__track img[src*="ec-black"] { height: 31px; } .band__track img[src*="rabobank"] { height: 36px; } .band__track img[src*="metip"] { height: 20px; }
+  .band__text b { font-size: 16px; line-height: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .band__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; row-gap: 20px; } .band__track [aria-hidden] { display: none; } .band__view { -webkit-mask-image: none; mask-image: none; } }
+/* the black version (?partners=zwart): a band in the opening's black, edged by two hairlines, the logos white */
+.band-zwart .band { background: var(--studio); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), inset 0 -1px 0 rgba(255, 255, 255, .1); }
+.band-zwart .band__track img { filter: grayscale(1) brightness(0) invert(1); }
+.band-zwart .band__track img[src*="ec-black"] { filter: invert(1); }
+.band-zwart .band__text span { color: #86868b; } .band-zwart .band__text b { color: #f5f5f7; }
+
+/* ================================================================== v49
+   the partners back as they were (title and a row of logos, between the figures and the questions), on the light grey of
+   Ember in detail, so that grey comes back once more; the logos black */
+.partners { background: #f5f5f7; color: #1d1d1f; }
+
+/* ================================================================== v50
+   the partners on dark grey (the site's own, between the black of the figures and of the questions), the logos white */
+.partners { background: var(--bg-1); color: #f5f5f7; }
+.partners__title { color: #f5f5f7; }
+.partners__logos img, .partners__logos li:first-child img { filter: none; opacity: .9; }
+.partners__text span { color: #86868b; } .partners__text b { color: #f5f5f7; }
+
+/* ================================================================== v51
+   the partners: the title on the left, the logos beside it on the right (two by two) */
+@media (min-width: 861px) {
+  .partners .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: clamp(32px, 5vw, 96px); }
+  .partners__logos { margin-top: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 3.6vw, 56px) clamp(32px, 4vw, 64px); justify-items: start; }
+}
+/* the lights on the hardware close up (in place of the turntable zoomed in, which read soft) */
+.look__ring { position: absolute; inset: 0; margin: 0; overflow: hidden; border-radius: inherit; opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility 0s .6s; pointer-events: none; }
+.look__stage[data-f="lights"] .look__ring { opacity: 1; visibility: visible; transition-delay: .15s, 0s; }
+.look__stage[data-f="lights"] .look__cam { opacity: 0; pointer-events: none; }
+.look__ring img, .look__ring canvas { position: absolute; max-width: none; -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 92%); mask-image: linear-gradient(180deg, #000 62%, transparent 92%); }
+.look__ring img { filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .16)); }
+.look__ring img, .look__ring canvas { -webkit-mask-image: linear-gradient(180deg, #000 46%, rgba(0, 0, 0, .9) 58%, rgba(0, 0, 0, .55) 72%, rgba(0, 0, 0, .2) 84%, transparent 95%); mask-image: linear-gradient(180deg, #000 46%, rgba(0, 0, 0, .9) 58%, rgba(0, 0, 0, .55) 72%, rgba(0, 0, 0, .2) 84%, transparent 95%); }
+/* the close up kept crisp: no filter on the picture (a filter can draw it at a lower resolution) */
+.look__ring img { filter: none; }
+
+/* ================================================================== v53 · on a phone only
+   the questions' title on the left, and it and the waitlist's title at the size of the partners' title */
+@media (max-width: 860px) {
+  .faq .faq__title, .foot .foot__h { font-size: clamp(44px, 4.4vw, 76px); line-height: 1.02; letter-spacing: -.04em; }
+  .faq .faq__title { text-align: left; }
+  /* the button stays inside the e-mail field, as on a desktop (it went under it) */
+  .foot .join__field { flex-direction: row; align-items: center; height: 60px; padding: 5px; gap: 6px; border-radius: 30px; background: var(--vlak); box-shadow: inset 0 0 0 1px var(--lijn); }
+  .foot .join__field:focus-within { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45); }
+  .foot .join__field input { flex: 1; width: auto; min-width: 0; height: 50px; padding: 0 16px; border-radius: 0; background: none; box-shadow: none; }
+  .foot .join__field input:focus-visible { box-shadow: none; }
+  .foot .join__field .pill { width: auto; height: 50px; padding: 0 22px; border-radius: 25px; }
+  /* less room between the form and the links under it */
+  .foot[data-v="h"] .foot__grid { grid-template-rows: 40px auto 8px auto auto 24px auto 20px auto 32px; }
+  .foot[data-v="h"] .foot__contact { padding-top: 16px; }
+}
+
+/* ================================================================== v55
+   Ember in detail on a phone: one part at a time, in the middle between a round arrow on the left and one on the right
+   (one tap to go on), all in the pills' own light grey; the chosen part's plus turns into a minus and its text shows
+   under the row. No scrolling row and no fade */
+.look__rail { display: contents; }
+.look__arrow, .look__desc { display: none; }
+@media (max-width: 860px) {
+  /* the row 16 px from the card's edges; the part fills the room between the arrows, 12 px from each */
+  .look__rail { order: 3; display: flex; align-items: center; gap: 12px; align-self: stretch; width: auto; margin-inline: -8px; }
+  .look .xf { order: 0; flex: 1; min-width: 0; width: auto; display: flex; justify-content: stretch; max-width: none; overflow: visible; padding: 0; -webkit-mask-image: none; mask-image: none; }
+  .look .xf__item, .look .xf__item.is-open { display: none; flex: 1; width: 100%; max-width: none; border-radius: 26px; background: #f0f0f2; }
+  .look .xf__item.is-vis { display: block; }
+  .look .xf__pill { min-height: 52px; padding: 8px 16px 8px 14px; gap: 10px; font-size: 15px; line-height: 18px; white-space: normal; text-wrap: balance; }
+  .look .xf__plus { width: 28px; height: 28px; }
+  .look .xf__more { display: none; }
+  .look__arrow { flex: none; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: #f0f0f2; color: #1d1d1f; cursor: pointer; transition: background-color .2s var(--ease), opacity .2s var(--ease); }
+  .look__arrow:active { background: #e8e8ed; }
+  .look__arrow[disabled] { opacity: .35; cursor: default; }
+  .look__arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .look__arrow:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 2px; }
+  .look__desc { order: 4; display: block; width: 100%; }
+  .look__desc:empty { display: none; }
+  .look__desc p { margin: 0; padding: 0 4px; font-size: 16px; line-height: 25px; color: #424245; }
+  .look__desc .xf__fine { margin-top: 8px; font-size: 13px; line-height: 19px; color: #6e6e73; }
+  .look__desc .xf__steps { margin: 0; padding: 0 4px; list-style: none; display: grid; gap: 12px; }
+  .look__desc .xf__steps li { display: grid; grid-template-columns: 28px 1fr; column-gap: 8px; font-size: 16px; line-height: 25px; color: #424245; }
+  .look__desc .xf__steps b { grid-row: span 2; color: #6e6e73; font-weight: 500; }
+  .look__desc .xf__steps strong { color: #1d1d1f; font-weight: 500; }
+}
+/* on a small phone the pills are a little more compact, so the longest one fits between the arrows */
+@media (max-width: 400px) {
+  .look .xf__pill { min-height: 52px; padding: 8px 14px 8px 12px; gap: 8px; font-size: 14px; line-height: 18px; }
+  .look .xf__plus { width: 26px; height: 26px; }
+}
+/* v55: on a phone the content fits one screen: the stage gives way to the title, the row and the text under it, and
+   every view shows the whole of Ember (Knop en lichtring as the whole front with its lights, not the close up) */
+@media (max-width: 860px) {
+  .look__stage { height: clamp(260px, calc(100vh - 500px), 420px); height: clamp(260px, calc(100svh - 500px), 420px); min-height: 0; }
+  .look__stage[data-f="lights"] .look__ring { opacity: 0; visibility: hidden; }
+  .look__stage[data-f="lights"] .look__cam { opacity: 1; pointer-events: none; }
+}
+/* v55: on a phone the part's name always on one line, without the plus (the arrows go on); its size follows the room
+   between the arrows (the card 24 px in, the arrows 40 px and 16 px from its edge, 12 px to the pill): 15 px from a
+   390 px screen, a little smaller on narrower phones. The text under it a step smaller: 14 px */
+@media (max-width: 860px) {
+  .look .xf__plus { display: none; }
+  .look .xf__pill { justify-content: center; min-height: 48px; padding: 8px 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-wrap: nowrap;
+    font-size: clamp(12px, calc((100vw - 208px) / 12), 15px); line-height: 20px; }
+  .look__desc p, .look__desc .xf__steps li { font-size: 14px; line-height: 21px; }
+  .look__desc .xf__steps { gap: 10px; }
+  .look__desc .xf__steps li { grid-template-columns: 24px 1fr; }
+  .look__desc .xf__steps b { font-size: 12px; }
+  .look__desc .xf__fine { font-size: 12px; line-height: 17px; }
+  .look__stage { height: clamp(260px, calc(100vh - 470px), 440px); height: clamp(260px, calc(100svh - 470px), 440px); }
+}
+
+/* ================================================================== v56
+   Leesbaar in de app: only the app's screen, no phone round it (no frame, no status bar, no island), in the app's own
+   format: 390 x 844, at Ember's scale 64,6 x 139,8 mm, with the corners of the display and a soft shadow as Ember has */
+.look__phone { width: calc(var(--mm) * 64.6); height: calc(var(--mm) * 139.8); padding: 0; border-radius: calc(var(--mm) * 7.8); background: #1c1e1f; box-shadow: 0 30px 60px -32px rgba(0, 0, 0, .42); overflow: hidden; }
+.look__screen { border-radius: inherit; background: linear-gradient(180deg, #1c1e1f 0%, #2a2c30 60%, #303236 100%); }
+.look__home { top: calc(var(--mm) * 3.3); }
+
+/* ================================================================== v57
+   Afmetingen en afwerking on a phone: Ember a step larger (zoom 1.1 in main.js) and the measures 15 px on the screen
+   (--dim-fs is set in the drawing's own units); the 1,5 cm moves down under its line as it grows */
+@media (max-width: 860px) {
+  .look__dims text { font-size: var(--dim-fs, 26px); }
+  .look__dims g[data-d="d"] text { transform: translateY(calc(var(--dim-fs, 26px) * 0.8 - 10px)); }
+  /* the shadows under Ember and the app's screen smaller and lighter: on the lower stage the big one ran past its foot
+     and was cut there, as a grey edge; now they fade out well inside it and the stage stays white */
+  .look__prod { filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .12)); }
+  .look__stage[data-f="size"] .look__prod { filter: drop-shadow(0 5px 9px rgba(0, 0, 0, .1)); }   /* Ember stands larger here, closer to the foot */
+  .look__phone { box-shadow: 0 12px 24px -16px rgba(0, 0, 0, .28); }
+  /* the tube in Magnetische bevestiging fades out fully before the stage's foot (it ended at the edge, still faintly grey) */
+  .look__magnet img, .look__magnet canvas:not(.look__lines) { -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 70%, transparent 93%); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 70%, transparent 93%); }
+}
+
+/* ================================================================== v58
+   Veelgestelde vragen: the last pill, "Staat je vraag er niet bij?", opens a short form in the site's own parts. From the
+   top: the e-mail address, the question, the white pill. All on the left edge of the answers' text (58 px in), one width */
+.ask { display: grid; gap: 12px; padding: 0 24px 24px 58px; }
+.ask__in { display: block; width: 100%; box-sizing: border-box; border: 0; background: var(--vlak); box-shadow: inset 0 0 0 1px var(--lijn); color: var(--text); font: 400 17px/26px var(--font); outline: none; transition: box-shadow .2s; }
+.ask__in::placeholder { color: var(--text-3); opacity: .8; }
+.ask__in:focus-visible { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45); }
+.ask__in[aria-invalid="true"] { box-shadow: inset 0 0 0 1px #f2aba3; }
+input.ask__in { height: 56px; padding: 0 22px; border-radius: 28px; }
+.ask__q { min-height: 132px; padding: 16px 22px; border-radius: 24px; resize: vertical; }
+.ask__send { justify-self: start; height: 52px; padding: 0 28px; border: 0; border-radius: 26px; cursor: pointer; }
+.ask__send[disabled] { opacity: .6; cursor: progress; }
+.faq .ask .ask__msg { min-height: 22px; max-width: none; margin: 0; padding: 0; font-size: 15px; line-height: 22px; color: var(--text-2); text-align: left; }   /* not the answers' indent: it lines up with the fields */
+.faq__ask .xf__more > div > p:first-child { padding-bottom: 16px; }
+.ask__msg:empty { display: none; }
+.faq .ask .ask__msg.is-ok { color: var(--ok-t); }
+.faq .ask .ask__msg.is-err { color: #f2aba3; }
+.ask__msg a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 600px) {
+  .ask__in { font-size: 16px; line-height: 24px; }
+  .ask__send { justify-self: stretch; }
+}
+
+/* ================================================================== v59
+   The AvenNex mark in the bar goes to avennex.eu, "Ember" to the top of the page (one look, two links). In the footer:
+   "Een product van" before the AvenNex wordmark, the two together a link to avennex.eu */
+.bar__brand a { display: inline-flex; align-items: center; color: inherit; text-decoration: none; }
+.bar__home, .bar__name { border-radius: 6px; }
+.bar__home:focus-visible, .bar__name:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.foot__mark { display: inline-flex; align-items: center; gap: 10px; justify-self: start; align-self: start; width: auto; height: auto; margin-top: 2px; opacity: 1; color: var(--text-3); text-decoration: none; }
+.foot__mark img { display: block; width: 112px; height: auto; opacity: .92; transition: opacity .2s; }
+.foot__mark:hover img, .foot__mark:focus-visible img { opacity: 1; }
+.foot__mark:hover .foot__by { color: var(--text-2); }
+.foot__mark:focus-visible { outline: 2px solid var(--text-2); outline-offset: 6px; border-radius: 6px; }
+.foot__by { font-size: 14px; line-height: 20px; white-space: nowrap; transition: color .2s; }
+/* v59: the question form in the answers' own size: 16 px, everywhere (the fields were 17, the note 15, the pill 15 on a phone) */
+.faq .ask .ask__in { font-size: 16px; line-height: 25px; }
+.faq .ask .ask__send { font-size: 16px; }
+.faq .ask .ask__msg { font-size: 16px; line-height: 25px; }
+

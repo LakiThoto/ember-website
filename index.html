@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Ember · bewaakt je accu</title>
+<meta name="description" content="Ember is een compacte sensor met een app die laat zien hoe de temperatuur van je e-bike-accu zich ontwikkelt. Hij leert wat normaal is voor jouw accu en laat het je weten zodra die afwijkt. In ontwikkeling bij AvenNex.">
+<meta name="theme-color" content="#ece8e3">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:title" content="Ember · bewaakt je accu">
+<meta property="og:description" content="Een compacte sensor met een app die laat zien hoe de temperatuur van je e-bike-accu zich ontwikkelt.">
+<meta property="og:image" content="assets/img/og-ember.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon-ring.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/instrumentsans-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/ember-hero.webp?v=53" as="image" fetchpriority="high">
+<link rel="preload" href="assets/img/bike-plate.webp" as="image">
+<link rel="stylesheet" href="styles.css">
+<script defer src="zwerm-data.js"></script>
+<script defer src="zwerm.js"></script>
+<script defer src="brain-data.js"></script>
+<script defer src="main.js"></script>
+</head>
+<body>
+<a class="skip" href="#inhoud">Naar de inhoud</a>
+
+<header class="bar" id="bar">
+  <div class="bar__brand"><a class="bar__home" href="https://www.avennex.eu" aria-label="AvenNex, naar avennex.eu"><img src="assets/img/avennex-mark.svg" width="38" height="25" alt=""></a><i class="bar__sep" aria-hidden="true"></i><a class="bar__name" href="#top" aria-label="Ember, naar het begin">Ember</a></div>
+  <nav class="bar__nav" aria-label="Op deze pagina">
+    <a href="#werkt" data-ch="werkt">Zo werkt het</a>
+    <a href="#dichtbij" data-ch="dichtbij">Product</a>
+    <a href="#partners" data-ch="partners">Partners</a>
+    <a href="#vragen" data-ch="vragen">Vragen</a>
+  </nav>
+  <div class="bar__end">
+    <a class="pill" href="#wachtlijst">Zet je op de wachtlijst</a>
+  </div>
+</header>
+
+<canvas class="flow" aria-hidden="true"></canvas>
+<p class="bar__count count--corner" aria-hidden="true"><b data-count>01</b> / 07</p>
+<main id="inhoud">
+
+  <!-- ===================== 1 · the hero: Ember large on the studio black; the ring of dots is born out of its lights ===================== -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero__stage">
+    <p class="hero__word" aria-hidden="true">Ember</p>
+    <div class="layer ember hero__ember" role="img" aria-label="Ember: een klein donkergrijs kastje met afgeronde hoeken, één ronde knop en een ring van twaalf lichtpunten."></div>
+    <canvas class="hero__lights" aria-hidden="true"></canvas>
+    <i class="hero__floor" aria-hidden="true"></i>
+    <div class="hero__copy">
+      <h1 id="hero-title" class="d1"><span class="ln">Ember</span> <span class="ln">bewaakt je accu.</span></h1>
+      <a class="pill pill--line hero__cta" href="#wachtlijst">Zet je op de wachtlijst</a>
+    </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2 · how Ember does it: the statement, white; the hero's ring folds into a brain of dots beside it
+       (v37: the model that learns what is normal; v36 had a forecast chart, v35 the AI star) ===================== -->
+  <section class="quote" id="wat" aria-label="Hoe Ember werkt">
+    <div class="quote__hold"><div class="quote__pin">
+      <p class="quote__text" data-words>Ember meet de temperatuur van je e-bike-accu, leert wat normaal is en laat je samen met de app weten wanneer je accu aandacht nodig heeft.</p>
+      <div class="quote__cloud" aria-hidden="true"></div>
+    </div></div>
+  </section>
+
+  <!-- ===================== 3 · how it works: the bike; the sticker, the click, the data, the model, the notice ===================== -->
+  <section class="seq" id="werkt" aria-label="Zo werkt het">
+    <div class="seq__stage">
+      <img class="layer bike bike--blur" src="assets/img/bike-plate-blur.webp" width="412" height="952" alt="" aria-hidden="true">
+      <img class="layer bike" src="assets/img/bike-plate.webp" width="825" height="1905" alt="Een zwarte e-bike met de accu ingebouwd in de onderbuis, gefotografeerd in een donkere studio.">
+      <div class="seq__shade" aria-hidden="true"></div>
+      <img class="layer shadow shadow--soft" src="assets/img/ember-shadow-soft.webp" width="223" height="406" alt="" aria-hidden="true">
+      <img class="layer shadow shadow--tight" src="assets/img/ember-shadow-tight.webp" width="223" height="406" alt="" aria-hidden="true">
+      <svg class="layer plate" width="450" height="900" viewBox="0 0 450 900" aria-hidden="true"><defs><linearGradient id="plateFace" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d3d7db"/><stop offset=".45" stop-color="#a3a9ae"/><stop offset=".55" stop-color="#bcc2c6"/><stop offset="1" stop-color="#858c92"/></linearGradient></defs><rect x="113" y="96" width="232" height="720" rx="78" fill="#2a2d30" transform="translate(-6 5)"/><rect x="113" y="96" width="232" height="720" rx="78" fill="url(#plateFace)"/><rect x="114" y="97" width="230" height="718" rx="77" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"/></svg>
+      <div class="layer ember" role="img" aria-label="Ember: een klein donkergrijs kastje met afgeronde hoeken, één ronde knop en een ring van twaalf lichtpunten."></div>
+      <div class="tags" aria-hidden="true">
+        <svg><path data-t="a"/><path data-t="b"/><path data-t="c"/><circle data-t="a" r="2.5"/><circle data-t="b" r="2.5"/><circle data-t="c" r="2.5"/></svg>
+        <p class="tag" data-t="a">Ember<span>Magnetisch bevestigd</span></p>
+        <p class="tag" data-t="b">Magnetische sticker<span>Eenmalig aangebracht</span></p>
+        <p class="tag" data-t="c">Accu<span>In de onderbuis</span></p>
+      </div>
+
+      <!-- the notice: the app's home screen (Figma V10 · H1), the swarm and one word -->
+      <div class="phone" role="img" aria-label="Het thuisscherm van de Ember-app met voorbeelddata. Bij het scrollen gaat het door drie toestanden: Normaal (21 graden), Aandacht (38 graden, melding ‘Warmer dan normaal’) en Oververhit (71 graden, alarm).">
+        <div class="iphone iphone--panel" data-phone="seq">
+        <div class="ios">
+          <div class="ios__scroll">
+          <div class="ios__kop">
+            <div class="ios__titel"><b>Mijn e-bike</b><span class="ios__knop"><img src="assets/img/app-icon-profile.svg" width="24" height="24" alt=""></span></div>
+            <div class="ios__voertuigen"><img src="assets/img/app-vehicle-ebike.svg" width="48" height="48" alt=""><span class="ios__knop"><img src="assets/img/app-icon-bell.svg" width="24" height="24" alt=""></span></div>
+          </div>
+          <div class="ios__inhoud">
+            <div class="ios__held"><canvas></canvas><span class="ios__state" data-a="state">Normaal</span></div>
+            <div class="ios__kaart" data-a="kaart"><div class="ios__laag ios__laag--normaal"><p class="ios__temp" aria-label="Accu nu 21 graden">21°</p><p class="ios__k20">Alles normaal</p></div><div class="ios__laag ios__laag--warn" aria-hidden="true"><p class="ios__temp" aria-label="Accu nu 38 graden">38°</p><p class="ios__k20">Warmer dan normaal</p></div><div class="ios__laag ios__laag--heet" aria-hidden="true"><p class="ios__temp" aria-label="Accu nu 71 graden">71°</p><p class="ios__k20">Oververhit</p></div></div>
+            <div class="vandaag vandaag--in" role="group" aria-label="De temperatuurgrafiek uit de app, met voorbeeldgegevens">
+            <div class="vandaag__kop">
+              <div class="periode">
+                <div class="periode__tabs" role="group" aria-label="Periode"><button type="button" class="ptab ptab--on" data-mode="dag" aria-pressed="true">Dag</button><button type="button" class="ptab" data-mode="week" aria-pressed="false">Week</button><button type="button" class="ptab" data-mode="maand" aria-pressed="false">Maand</button></div>
+                <div class="periode__knoppen">
+                  <button type="button" class="pknop" data-step="-1" aria-label="Vorige periode"><img src="assets/img/app-icon-chevron-left.svg" width="24" height="24" alt=""></button>
+                  <button type="button" class="pknop" data-step="1" aria-label="Volgende periode"><img src="assets/img/app-icon-chevron-right.svg" width="24" height="24" alt=""></button>
+                </div>
+              </div>
+              <div class="periode__tekst" aria-live="polite"><p class="t20" data-c="title">1 dag</p><p class="t12" data-c="sub">zonder incident · vandaag</p></div>
+            </div>
+            <div class="grafiek">
+              <div class="grafiek__vlak"><div class="grafiek__raster"></div><div class="grafiek__raster grafiek__raster--2"></div><div class="grafiek__bars"></div><p class="grafiek__as grafiek__as--20">20°</p><p class="grafiek__as grafiek__as--15">15°</p></div>
+              <div class="grafiek__uren" data-c="axis"><p>−24 u</p><p>−18 u</p><p>−12 u</p><p>−6 u</p><p class="nu">Nu</p></div>
+            </div>
+          </div>
+            <div class="ios__tegels">
+              <div class="ios__tegel"><b>Laatste meting</b><span>1 min geleden</span><img src="assets/img/app-icon-clock.svg" width="24" height="24" alt=""></div>
+              <div class="ios__tegel"><b>Verloop</b><span data-a="trend">Stabiel</span><i class="ios__streep" aria-hidden="true"><b></b><b></b><b class="d"></b><b class="d"></b><b class="d"></b></i></div>
+              <div class="ios__tegel"><b>Meldingen</b><span data-a="melding">Weer normaal · 23:55</span><img src="assets/img/app-icon-bell.svg" width="24" height="24" alt=""></div>
+              <div class="ios__tegel"><b>Ember</b><span>Batterij 81% · verbonden</span><i class="ios__batterij" aria-hidden="true"><b></b></i></div>
+              <div class="ios__tegel"><b>Contacten</b><span>2 contacten</span><img src="assets/img/app-avatars.svg" width="48" height="28" alt=""></div>
+              <div class="ios__tegel"><b>Over Ember</b><span>Firmware 1.0.4</span><img src="assets/img/app-icon-info.svg" width="24" height="24" alt=""></div>
+            </div>
+          </div>
+          </div>
+          <div class="push"><span class="push__icon"><img src="assets/img/favicon-ring.svg" width="40" height="40" alt=""></span><div><p class="push__top"><b>Ember</b><span>nu</span></p><p class="push__t">Warmer dan normaal</p><p class="push__x">Je accu wordt sneller warm dan normaal. Laadt hij? Haal de lader eruit.</p></div></div>
+        </div>
+      </div>
+      </div>
+
+      <div class="beat beat--bike">
+        <h2 class="d2"><span class="ln">Op het frame,</span> <span class="ln">naast de accu.</span></h2>
+        <p class="small">Je plaatst Ember op het frame, vlak bij de accu. Zonder kabels en zonder aansluiting op de accu.</p>
+      </div>
+      <div class="beat beat--sticker">
+        <h2 class="d2"><span class="ln">Magnetische</span> <span class="ln">bevestiging.</span></h2>
+        <p class="small">Je plakt eenmalig een dunne magnetische sticker bij de accu. Later haal je hem zonder resten weg.</p>
+      </div>
+      <div class="beat beat--click">
+        <h2 class="d2"><span class="ln">Elke keer</span> <span class="ln">dezelfde stand.</span></h2>
+        <p class="small">De magneet zet Ember steeds in dezelfde positie. Losnemen om op te laden gaat met de hand, zonder gereedschap.</p>
+      </div>
+      <div class="beat beat--data">
+        <h2 class="d2"><span class="ln">Eén overzicht</span> <span class="ln">in de app.</span></h2>
+        <p class="small">Ember meet elke paar minuten, van buitenaf. De app toont de actuele temperatuur, de status en het verloop per dag, week en maand.</p>
+      </div>
+      <div class="beat beat--notice">
+        <h2 class="d2"><span class="ln">Een melding</span> <span class="ln">bij afwijking.</span></h2>
+        <p class="small">Warmt de accu sneller op dan het voorspellingsmodel verwacht? Dan krijg je één stille melding met advies.</p>
+      </div>
+      <div class="beat beat--heet">
+        <h2 class="d2"><span class="ln">Een alarm</span> <span class="ln">bij oververhitting.</span></h2>
+        <p class="small">Raakt de accu oververhit, dan gaan je telefoon en Ember zelf af, ook door je stiltestand heen. Reageer je niet binnen drie minuten, dan krijgen je contacten bericht.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · up close: the team's six things (their menu on the left), seen on the product on the right ===================== -->
+  <section class="look" id="dichtbij" aria-labelledby="look-title">
+    <div class="wrap look__grid">
+    <div class="look__menu">
+      <h2 id="look-title" class="look__title"><span class="ln">Ember</span> <span class="ln">in detail.</span></h2>
+      <div class="look__rail">
+      <button type="button" class="look__arrow look__arrow--prev" aria-label="Vorig onderdeel" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10 12.5 15.5"/></svg></button>
+      <ul class="xf" role="list">
+        <li class="xf__item" data-f="measure"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="xf-measure"><span class="xf__plus" aria-hidden="true"></span><span>Contactloze meting</span></button><div class="xf__more" id="xf-measure"><div><p>Twee infraroodsensoren op de achterkant lezen de temperatuur van de accubehuizing af, zonder die aan te raken. Een derde sensor meet de lucht eromheen, zodat de app de twee kan vergelijken. Ember meet niet in de cellen.</p></div></div></li>
+        <li class="xf__item" data-f="magnet"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="xf-magnet"><span class="xf__plus" aria-hidden="true"></span><span>Magnetische bevestiging</span></button><div class="xf__more" id="xf-magnet"><div><ol class="xf__steps"><li><b>01</b><strong>Sticker aanbrengen.</strong><span>Eenmalig, zelfklevend, bij de accu. Later zonder resten te verwijderen.</span></li><li><b>02</b><strong>Ember plaatsen.</strong><span>Magnetisch, steeds in dezelfde positie. Losnemen gaat met de hand, zonder gereedschap.</span></li></ol></div></div></li>
+        <li class="xf__item" data-f="lights"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="xf-lights"><span class="xf__plus" aria-hidden="true"></span><span>Knop en lichtring</span></button><div class="xf__more" id="xf-lights"><div><p>Eén ronde knop, op de tast te vinden, omringd door twaalf lichtpunten. Die zijn ontworpen om wit, groen, oranje of rood te tonen, gelijk aan de status in de app, zodat de toestand ook zonder telefoon zichtbaar is.</p></div></div></li>
+        <li class="xf__item" data-f="app"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="xf-app"><span class="xf__plus" aria-hidden="true"></span><span>Leesbaar in de app</span></button><div class="xf__more" id="xf-app"><div><p>De app maakt van de metingen één woord en een ring van stippen, met de afgelopen 24 uur één tik verder. Voor iOS en Android, in ontwikkeling en los te downloaden.</p></div></div></li>
+        <li class="xf__item" data-f="size"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="xf-size"><span class="xf__plus" aria-hidden="true"></span><span>Afmetingen en afwerking</span></button><div class="xf__more" id="xf-size"><div><p>Ongeveer 10,5 × 3,5 × 1,5 cm in het huidige ontwerp. Donkergrijs met een satijnmatte afwerking, zodat hij nauwelijks opvalt op het frame.</p></div></div></li>
+        <li class="xf__item" data-f="box"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="xf-box"><span class="xf__plus" aria-hidden="true"></span><span>Inhoud van de doos</span></button><div class="xf__more" id="xf-box"><div><p>Ember, de magnetische sticker en een USB-C-kabel. Opladen doe je ongeveer eens per kwartaal. De app voor iOS en Android download je los. Dit is het huidige plan; de definitieve inhoud volgt voor de lancering.</p></div></div></li>
+      </ul>
+      <button type="button" class="look__arrow look__arrow--next" aria-label="Volgend onderdeel"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10 7.5 15.5"/></svg></button>
+      </div>
+      <div class="look__desc" aria-live="polite"></div>
+    </div>
+    <div class="look__stage" data-f="all">
+      <div class="look__cam">
+        <div class="look__prod">
+          <svg class="look__plate" viewBox="0 0 420 1260" aria-hidden="true"><defs><linearGradient id="lookPlate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d3d7db"/><stop offset=".45" stop-color="#a3a9ae"/><stop offset=".55" stop-color="#bcc2c6"/><stop offset="1" stop-color="#858c92"/></linearGradient></defs><rect x="84" y="140" width="252" height="980" rx="88" fill="url(#lookPlate)"/></svg>
+          <canvas class="look__turn" role="img" aria-label="Ember, te draaien: voorkant, zijkant en achterkant van het huidige ontwerp."></canvas>
+          <canvas class="look__lights" aria-hidden="true"></canvas>
+          <svg class="look__dims" viewBox="0 0 420 1260" aria-hidden="true">
+            <g data-d="h"><path d="M60 72V1188M44 72H76M44 1188H76"/><text x="30" y="630" transform="rotate(-90 30 630)">10,5 cm</text></g>
+            <g data-d="d"><path d="M132 1230H288M132 1214V1246M288 1214V1246"/><text x="210" y="1256">1,5 cm</text></g>
+          </svg>
+        </div>
+      </div>
+      <!-- in the box, at true size: our own render (3d/ember_scene.py mode=box), with the measures -->
+      <figure class="look__box" data-v="box">
+        <img src="assets/img/box.webp?v=53" width="2400" height="1200" alt="De inhoud van de doos: een opgerolde USB-C-kabel, Ember en de magnetische sticker." loading="lazy">
+        <p class="look__lbl look__lbl--cable"><b>USB-C-kabel</b></p>
+        <p class="look__lbl look__lbl--ember"><b>Ember</b></p>
+        <p class="look__lbl look__lbl--sticker"><b>Magnetische sticker</b></p>
+      </figure>
+      <!-- v46: measuring: the team's photo made over as our own render (3d/ember_scene.py mode=measure), Ember in profile on a light
+           battery housing, in the white of this stage; the sensors marked, notes with lines -->
+      <figure class="look__photo" data-v="measure" aria-hidden="true">
+        <img src="assets/img/ember-measure.webp?v=53" width="2304" height="1536" alt="" loading="lazy">
+        <i class="look__mark"></i><i class="look__mark look__mark--air"></i>
+        <canvas class="look__lines"></canvas>
+        <p class="look__pn look__pn--ir"><b>Twee infraroodsensoren</b><span>Naast elkaar, 2 cm onder de bovenkant. Ze meten de accubehuizing zonder contact.</span></p>
+        <p class="look__pn look__pn--air"><b>Luchtsensor</b><span>Meet de lucht rond Ember, zodat de app kan vergelijken.</span></p>
+      </figure>
+      <!-- v51: the button and its ring, on the hardware close up (mode=ring): the twelve lights fill from the top down to the
+           bottom, as a loader, in the app's colours one after the other -->
+      <figure class="look__ring" data-v="lights" aria-hidden="true">
+        <img src="assets/img/ember-ring.webp?v=53" width="2400" height="3840" alt="" loading="lazy">
+        <canvas></canvas>
+      </figure>
+      <!-- v46: the magnetic mount, as in the scroll story: the sticker on the housing, Ember comes in and clicks on, its lights wake;
+           then it lifts off again. The housing and sticker are one picture, Ember's frames lie over it (mode=magnet) -->
+      <figure class="look__magnet" data-v="magnet" aria-hidden="true">
+        <img src="assets/img/magnet-bg0.webp?v=53" width="1100" height="1375" alt="" loading="lazy">
+        <canvas></canvas>
+        <canvas class="look__lines"></canvas>
+        <p class="look__pn look__pn--sticker"><b>Magnetische sticker</b><span>Eenmalig aangebracht</span></p>
+        <p class="look__pn look__pn--on"><b>Ember</b><span>Magnetisch bevestigd</span></p>
+      </figure>
+      <!-- v45: readable in the app: Ember steps aside, the app beside it at the same scale. v56: only the app's screen (390 x 844,
+           64,6 x 139,8 mm), no phone and no status bar round it -->
+      <div class="look__phoneview" data-v="app" aria-hidden="true">
+        <div class="look__phone"><div class="look__screen"><img class="look__home" src="assets/img/app-home.webp" width="660" height="1467" alt="" loading="lazy"></div></div>
+      </div>
+      <label class="look__slider"><input type="range" min="0" max="359" step="1" value="0" aria-label="Draai Ember"></label>
+      <div class="look__ir" aria-hidden="true"><i></i><i></i><p class="note note--ir"><b>Twee infraroodsensoren</b><span>Naast elkaar, ongeveer 2 cm onder de bovenkant.</span></p></div>
+    </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- ===================== 6 · the figures (v43), as Apple sets out figures: a short centred head, three columns each with
+       a line above the figure, the figure large and a line under it (v44: no source line, no footnote marks) ===================== -->
+  <section class="cijf" id="cijfers" aria-labelledby="figs-title">
+    <div class="cijf__wrap">
+      <p class="cijf__eyebrow" data-in>In cijfers</p>
+      <h2 id="figs-title" class="cijf__title" data-in>Accubranden nemen toe.</h2>
+      <p class="cijf__intro" data-in>Bij steeds meer woningbranden is de accu van een elektrische fiets, scooter of bromfiets de vermoedelijke oorzaak.</p>
+      <ul class="cijf__stats" role="list"><!-- v46: in order, as a build-up: 2023, 2024, then all batteries -->
+        <li data-in><span class="cijf__over">In 2023</span><b class="cijf__num">2%</b><span class="cijf__under">van de woningbranden.</span></li>
+        <li data-in><span class="cijf__over">In 2024</span><b class="cijf__num cijf__num--hot">2,2%</b><span class="cijf__under">van de woningbranden begon vermoedelijk bij zo’n accu.</span></li>
+        <li data-in><span class="cijf__over">Alle accu’s en batterijen</span><b class="cijf__num">bijna 5%</b><span class="cijf__under">van de woningbranden in 2024.</span></li>
+      </ul>
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <!-- ===================== partners: the title large, the logos in a row (v50: on dark grey, the logos white) ===================== -->
+  <section class="partners" id="partners" aria-labelledby="partners-title">
+    <div class="wrap">
+      <h2 id="partners-title" class="partners__title" data-in><span class="ln">Ontwikkeld</span> <span class="ln">met partners</span></h2>
+      <ul class="partners__logos" data-in>
+        <li><img src="assets/img/partners/ec-negative.svg" width="290" height="72" alt="Europese Commissie, Joint Research Centre"></li>
+        <li><img src="assets/img/partners/rabobank-negative.png" width="355" height="142" alt="Rabobank"></li>
+        <li><img src="assets/img/partners/metip-negative.png" width="555" height="98" alt="METIP"></li>
+        <li class="partners__text"><span>Start- en Ontwikkelbijdrage</span><b>Noord-Holland Noord</b></li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ===================== 7 · questions, with an image under the title ===================== -->
+  <section class="faq" id="vragen" aria-labelledby="faq-title">
+    <div class="wrap faq__wrap">
+      <h2 id="faq-title" class="d2 faq__title" data-in><span class="ln">Veelgestelde</span> <span class="ln">vragen</span></h2>
+      <ul class="xf faq__list" role="list" data-in>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-0"><span class="xf__plus" aria-hidden="true"></span><span>Voorkomt Ember accubranden?</span></button><div class="xf__more" id="faq-0"><div><p>Nee. Ember voorkomt of blust geen branden en maakt een accu niet veiliger. Hij laat zien hoe de temperatuur zich ontwikkelt en waarschuwt als dat afwijkt. Gebruik hem naast de beveiliging van je accu, een rookmelder en het laadadvies van de brandweer.</p></div></div></li>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-1"><span class="xf__plus" aria-hidden="true"></span><span>Hoe weet Ember wat normaal is?</span></button><div class="xf__more" id="faq-1"><div><p>Ember leert hoe jouw accu zich normaal gedraagt. Een voorspellingsmodel vergelijkt elke meting met dat patroon, en de app laat het je weten zodra je accu afwijkt. Het model wordt nog ontwikkeld en getest.</p></div></div></li>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-2"><span class="xf__plus" aria-hidden="true"></span><span>Wat meet Ember precies?</span></button><div class="xf__more" id="faq-2"><div><p>De buitenkant van de accu, met twee infraroodsensoren die hem niet raken, en de lucht eromheen met een derde sensor. Niet de cellen binnenin.</p></div></div></li>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-3"><span class="xf__plus" aria-hidden="true"></span><span>Op welke fietsen past Ember?</span></button><div class="xf__more" id="faq-3"><div><p>De eerste versie is gemaakt voor e-bikes, met Ember op het frame bij de accu. Welke fietsen en accuvormen hij ondersteunt, testen we nu.</p></div></div></li>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-4"><span class="xf__plus" aria-hidden="true"></span><span>Hoe krijgt Ember stroom?</span></button><div class="xf__more" id="faq-4"><div><p>Uit een eigen oplaadbare batterij. Ongeveer eens per kwartaal laad je hem op met de USB-C-kabel uit de doos. Er komt niets aan de accu van je e-bike.</p></div></div></li>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-5"><span class="xf__plus" aria-hidden="true"></span><span>Komt er een abonnement?</span></button><div class="xf__more" id="faq-5"><div><p>Dat hangt af van de verbinding, wifi of mobiel, en die keuze maken we nog. Komt er een abonnement, dan weet je precies waarvoor je betaalt voordat je koopt.</p></div></div></li>
+        <li class="xf__item"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-6"><span class="xf__plus" aria-hidden="true"></span><span>Wanneer is Ember verkrijgbaar en wat kost hij?</span></button><div class="xf__more" id="faq-6"><div><p>Er is nog geen prijs of datum. We overwegen een lancering via Kickstarter, te beginnen in Nederland. Wie op de wachtlijst staat, hoort het als eerste.</p></div></div></li>
+        <!-- v58: the last step: a question that is not in the list, in the same pill; it opens a short form -->
+        <li class="xf__item faq__ask"><button type="button" class="xf__pill" aria-expanded="false" aria-controls="faq-ask"><span class="xf__plus" aria-hidden="true"></span><span>Staat je vraag er niet bij?</span></button><div class="xf__more" id="faq-ask"><div>
+          <p>We antwoorden per e-mail.</p>
+          <form class="ask" data-api="" data-mail="info@avennex.eu" novalidate>
+            <label class="vh" for="ask-email">E-mailadres</label>
+            <input class="ask__in" id="ask-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="E-mailadres" required aria-describedby="ask-msg">
+            <label class="vh" for="ask-q">Je vraag</label>
+            <textarea class="ask__in ask__q" id="ask-q" name="question" rows="4" maxlength="1200" placeholder="Je vraag" required aria-describedby="ask-msg"></textarea>
+            <button class="pill ask__send" type="submit">Verstuur</button>
+            <p class="ask__msg" id="ask-msg" role="status" aria-live="polite"></p>
+          </form>
+        </div></div></li>
+      </ul>
+    </div>
+  </section>
+
+
+
+</main>
+
+<footer class="foot" id="wachtlijst" data-v="h">
+  <div class="foot__grid">
+    <div class="foot__main">
+    <div class="foot__intro"><h2 class="foot__h"><span class="ln">Zet je op</span> <span class="ln">de wachtlijst.</span></h2><p class="foot__lead">Als eerste op de hoogte, met kans op deelname aan de pilot. Afmelden kan altijd.</p></div>
+    <form class="join__form" data-api="" novalidate data-in>
+          <label class="vh" for="join-email">E-mailadres</label>
+          <div class="join__field">
+            <input id="join-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="E-mailadres" required aria-describedby="join-msg">
+            <button class="pill" type="submit">Contact</button>
+          </div>
+          <p class="join__msg" id="join-msg" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+    <a class="foot__mark" href="https://www.avennex.eu"><span class="foot__by">Een product van</span><img src="assets/img/avennex-wordmark.svg" width="120" height="30" alt="AvenNex"></a>
+    <div class="foot__contact" id="contact"><a href="mailto:info@avennex.eu">info@avennex.eu</a><a href="https://www.linkedin.com/company/avennex-eu" rel="noopener" target="_blank">LinkedIn</a><a href="https://www.instagram.com/avennex.eu" rel="noopener" target="_blank">Instagram</a></div>
+    <p class="foot__legal">© 2026 AvenNex · Ember is in ontwikkeling en nog niet te koop. Ontwerpen, maten en gegevens zijn voorbeelden. <a href="https://www.avennex.eu/privacy-verklaring">Privacy</a></p>
+    <div class="foot__ember" aria-hidden="true"><div class="foot__prod"></div></div>
+  </div>
+</footer>
+</body>
+</html>
